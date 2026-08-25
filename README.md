@@ -1,116 +1,185 @@
-# Plantilla de requerimientos del proyecto (Clase 06)
+# REQUERIMIENTOS.md
 
-> 📋 **Este documento es la INSCRIPCIÓN al hackathon.** Cada equipo lo copia a su repositorio (como
-> `REQUERIMIENTOS.md`) y lo entrega lleno en la **Clase 06**.
-> **Equipo que no entregue sus requerimientos NO participa por el premio.**
-
-El **PM lidera** esta reunión y es el canal con el instructor (que hace de cliente) para dudas.
+> 📋 **Este documento corresponde a los requerimientos del proyecto AnaliCset para el Hackathon.**
 
 ---
 
-## 1. Identidad del equipo
+# 1. Identidad del equipo
 
-- **Nombre del equipo:**
-- **Nombre del proyecto:**
-- **Integrantes y roles:**
-  | Integrante | Rol | Responsable de |
-  |-----------|-----|----------------|
-  | | ⚙️ DevOps | Repo, Git, CI/CD, despliegue |
-  | | 🎨 Frontend | Interfaz, estilos, interacción |
-  | | 🔧 Backend | Servidor, API, lógica + BD |
-  | | 🧭 PM | Canal con el cliente, QA, entregas, desbloquear al equipo |
-  | | *(otros integrantes)* | Comparten Frontend/Backend según el tamaño del equipo |
+- **Nombre del equipo:** AnaliCset
+- **Nombre del proyecto:** AnaliCset
 
-> **Datos** y la **feature clave** las conoce y las trabaja **todo el equipo** (son la estructura del
-> proyecto, no un rol aparte).
+| Integrante | Rol | Responsable de |
+|------------|-----|----------------|
+| José Alejandro Pérez | ⚙️ DevOps | Repositorio, Git, CI/CD y despliegue |
+| Kevin Pedraza | 🎨 Frontend | Interfaz de usuario, estilos y experiencia |
+| Dylan Hernández | 🔧 Backend | API REST, lógica del sistema y base de datos |
+| Juan Felipe Aguillón | 🧭 PM | Gestión del proyecto, QA, entregas y comunicación con el cliente |
+
+> Los datos y la funcionalidad principal serán trabajados por todo el equipo.
 
 ---
 
-## 2. Visión del proyecto
+# 2. Visión del proyecto
 
-**La idea en una frase:** _..._
+## La idea en una frase
 
-- **¿Para quién es? (usuarios):**
-- **¿Qué problema resuelve o qué permite hacer?:**
-- **Visión (a dónde quieren llevarlo):**
-- **Modelo:** ¿es **B2B** (para empresas) o **B2C** (para consumidores/usuarios finales)?
-- **¿Cómo generaría valor o dinero?** (si aplica): _..._
+Desarrollar una plataforma web que permita analizar el histórico del Comité de Evaluación y Seguimiento del CSET mediante análisis de datos e inteligencia artificial para identificar patrones, tendencias y apoyar la toma de decisiones.
+
+### ¿Para quién es?
+
+- Personal del área de Apoyo de Comité.
+- Coordinadores académicos.
+- Directivos del CSET.
+- Funcionarios del SENA.
+
+### ¿Qué problema resuelve?
+
+Actualmente la información histórica del comité se encuentra distribuida en documentos PDF y archivos Excel, dificultando el análisis de tendencias, reincidencias y estadísticas que apoyen la gestión institucional.
+
+### Visión
+
+Crear una plataforma institucional que centralice, organice y analice la información histórica utilizando inteligencia artificial para convertir los datos en información útil para la toma de decisiones.
+
+### Modelo
+
+**B2B (Institucional).**
+
+### ¿Cómo genera valor?
+
+- Reduce tiempos de consulta.
+- Automatiza el análisis documental.
+- Facilita la elaboración de informes.
+- Identifica patrones difíciles de detectar manualmente.
+- Mejora la gestión del conocimiento institucional.
 
 ---
 
-## 3. Funcionalidades (alcance)
-
-Marca lo que SÍ entra en el MVP (lo mínimo para la Demo Day) y lo que sería "extra si da tiempo".
+# 3. Funcionalidades (Alcance)
 
 | Funcionalidad | ¿MVP? | ¿Extra? | Responsable |
 |---------------|:-----:|:-------:|-------------|
-| Ej: registro e inicio de sesión | ✅ | | Backend |
-| | | | |
-| | | | |
-
-> Regla: si algo no está en el MVP, **no se construye hasta terminar el MVP**. Primero lo esencial.
+| Inicio de sesión | ✅ | | Backend |
+| Dashboard principal | ✅ | | Frontend |
+| Gestión de usuarios | ✅ | | Backend |
+| Carga de archivos PDF | ✅ | | Backend |
+| Carga de archivos Excel | ✅ | | Backend |
+| Almacenamiento de información histórica | ✅ | | Backend |
+| Consulta de actas | ✅ | | Backend |
+| Filtros por fecha y consecutivo | ✅ | | Frontend |
+| Visualización de estadísticas | ✅ | | Frontend |
+| Detección de patrones mediante IA | ✅ | | Todo el equipo |
+| Generación de reportes | | ✅ | Backend |
+| Exportar resultados a PDF | | ✅ | Backend |
+| Dashboard avanzado | | ✅ | Frontend |
+| Predicción de tendencias | | ✅ | Todo el equipo |
 
 ---
 
-## 4. Requerimientos técnicos (cómo lo van a hacer)
+# 4. Requerimientos técnicos
 
-Deben cubrir **los mínimos del curso**. Marquen qué usarán:
+- [x] **Frontend:** HTML5 + CSS3 + JavaScript.
+- [x] **Backend:** Node.js + Express.
+- [x] **Base de datos:** MySQL.
+- [x] **Feature clave:** Análisis inteligente del histórico del Comité mediante IA para detectar patrones y tendencias.
+- [ ] **Tiempo real (Socket.IO):** No será utilizado en el MVP.
+- [x] **Autenticación:** Login con usuario y contraseña utilizando JWT.
+- [x] **Otra técnica / API externa:**
+  - OpenAI API
+  - PDF.js
+  - SheetJS
+  - Chart.js
 
-- [ ] **Frontend:** HTML semántico + CSS + JavaScript (DOM).
-- [ ] **Backend:** Node.js + Express (API con rutas).
-- [ ] **Base de datos:** _¿cuál? (SQLite / PostgreSQL / MySQL / otra)_ — listar tablas abajo.
-- [ ] **Feature clave:** _¿cuál es la funcionalidad estrella del proyecto?_
-- [ ] **Tiempo real (Socket.IO):** ¿lo usarán? _(suma puntos)_
-- [ ] **Autenticación:** ¿login con contraseña? ¿sesiones?
-- [ ] **Otra técnica / API externa:** _¿cuál?_
+## Tablas de datos previstas
 
-**Tablas de datos previstas (borrador):**
+```sql
+usuarios(
+    id,
+    nombre,
+    correo,
+    password,
+    rol
+);
+
+actas(
+    id,
+    fecha,
+    consecutivo,
+    archivo_pdf,
+    archivo_excel
+);
+
+casos(
+    id,
+    id_acta,
+    tipo,
+    descripcion,
+    estado
+);
+
+patrones(
+    id,
+    nombre,
+    descripcion,
+    porcentaje
+);
+
+reportes(
+    id,
+    fecha,
+    tipo,
+    archivo_generado
+);
 ```
-usuarios(id, nombre, correo, clave_hash, ...)
-...
-```
 
 ---
 
-## 5. Requerimientos de despliegue
+# 5. Requerimientos de despliegue
 
-- **Frontend se desplegará en:** _(GitHub Pages / Netlify / Vercel / …)_
-- **Backend se desplegará en:** _(Render / Railway / Fly.io / VPS / … — ver [../DESPLIEGUE-CICD.md](../DESPLIEGUE-CICD.md))_
-- **Base de datos:** _(archivo SQLite junto a la app / servicio gestionado / …)_
-- **Dominio:** _(subdominio gratis del host / dominio propio)_
-- **CI/CD:** ¿cada `push` actualiza el sitio? (debe ser **sí**)
-- **Link del proyecto (cuando exista):** _..._
+- **Frontend:** Vercel
+- **Backend:** Render
+- **Base de datos:** Railway MySQL
+- **Dominio:** Subdominio gratuito
+- **CI/CD:** Sí, mediante GitHub Actions
+- **Link del proyecto:** Pendiente
 
-### Costos estimados de servidores
-Aunque usemos capas gratuitas para el curso, estimen qué costaría en "producción real":
+## Costos estimados
 
-| Recurso | Proveedor / plan | Costo estimado (mes) |
-|---------|------------------|----------------------|
-| Hosting del backend | | |
-| Base de datos | | |
-| Dominio | | (anual) |
-| **Total estimado** | | |
+| Recurso | Proveedor / Plan | Costo estimado |
+|----------|------------------|----------------|
+| Backend | Render Starter | USD $7/mes |
+| Base de datos | Railway | USD $5/mes |
+| Dominio | Namecheap | USD $12/año |
+| **Total** | | **USD $12/mes + dominio** |
 
 ---
 
-## 6. Plan de trabajo (grueso)
+# 6. Plan de trabajo
 
 | Clases | Qué esperamos terminar |
 |--------|------------------------|
-| 07–08 (backend) | Servidor + API base |
-| 09–10 (datos) | Datos que persisten |
-| 11–13 (feature / auth / tiempo real) | La feature clave del proyecto |
-| 14–15 (integración) | Todo junto + desplegado |
-| 16 | Demo lista y ensayada |
+| 07-08 | Configuración del servidor, Express y API |
+| 09-10 | Base de datos y persistencia |
+| 11-13 | Procesamiento documental e IA |
+| 14-15 | Integración completa y despliegue |
+| 16 | Demo final y pruebas |
 
 ---
 
-## 7. Riesgos y dudas para el cliente (las lleva el PM)
+# 7. Riesgos y dudas para el cliente
 
-- **Lo que más nos preocupa:** _..._
-- **Preguntas para el instructor (cliente):** _(las hace el PM)_
+## Riesgos
 
----
+- Calidad de los documentos PDF históricos.
+- Información incompleta en algunos registros.
+- Diferencias entre formatos de actas.
+- Tiempo de procesamiento de grandes volúmenes de información.
+- Límites de uso de APIs de IA.
 
-> ✅ **Entregable de la Clase 06 (inscripción):** este archivo lleno y subido al repo del equipo
-> (commit del PM o del DevOps). Sin él, el equipo no participa por el premio.
+## Preguntas para el instructor
+
+- ¿Todas las actas poseen la misma estructura?
+- ¿Habrá acceso a la totalidad del histórico?
+- ¿Qué datos deben anonimizarse?
+- ¿Cuál es el volumen aproximado de documentos?
+- ¿Se espera únicamente análisis descriptivo o también modelos predictivos?
