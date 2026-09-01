@@ -136,9 +136,9 @@ reportes(
 
 # 5. Requerimientos de despliegue
 
-- **Frontend:** Vercel
+- **Frontend:** Render
 - **Backend:** Render
-- **Base de datos:** Railway MySQL
+- **Base de datos:** SupaBase PostgreSQL
 - **Dominio:** Subdominio gratuito
 - **CI/CD:** Sí, mediante GitHub Actions
 - **Link del proyecto:** Pendiente
@@ -148,9 +148,9 @@ reportes(
 | Recurso | Proveedor / Plan | Costo estimado |
 |----------|------------------|----------------|
 | Backend | Render Starter | USD $7/mes |
-| Base de datos | Railway | USD $5/mes |
+| Base de datos | Supabase| USD $0/mes |
 | Dominio | Namecheap | USD $12/año |
-| **Total** | | **USD $12/mes + dominio** |
+| **Total** | | **USD $19/mes + dominio** |
 
 ---
 
