@@ -1,5 +1,4 @@
 
-
 # REQUERIMIENTOS.md
 
 > 📋 **Este documento corresponde a los requerimientos del proyecto AnaliCset para el Hackathon.**
