@@ -1,6 +1,4 @@
-Aquí tienes el documento reformulado, adaptando toda la arquitectura técnica y el plan de trabajo para que el backend, el procesamiento de datos y la inteligencia artificial se ejecuten en **Python**, corrigiendo además la inconsistencia de la base de datos (para usar PostgreSQL en todo el documento, alineándolo con Supabase).
 
----
 
 # REQUERIMIENTOS.md
 
