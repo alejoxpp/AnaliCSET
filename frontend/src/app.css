@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+
+/*
+ * Tokens de marca de AnaliCSET.
+ * Paleta institucional (azul/gris) + acento reservado exclusivamente para
+ * señales de IA/patrones detectados — nunca para UI genérica, así el
+ * usuario aprende a asociar ese color con "esto lo marcó el análisis".
+ * Tipografía: Fraunces (títulos, carácter editorial) + Public Sans
+ * (cuerpo, diseñada para gobierno, muy legible).
+ */
+@theme {
+	--font-heading: 'Fraunces', ui-serif, Georgia, serif;
+	--font-body: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
+
+	--color-primary-50: #eef3f8;
+	--color-primary-100: #d7e4f0;
+	--color-primary-200: #b0c8e0;
+	--color-primary-300: #85a9cd;
+	--color-primary-400: #5d8ab8;
+	--color-primary-500: #3e6c9c;
+	--color-primary-600: #2a527a;
+	--color-primary-700: #1f3d5c;
+	--color-primary-800: #152a40;
+	--color-primary-900: #0c1926;
+
+	--color-neutral-50: #f7f8f9;
+	--color-neutral-100: #eef0f2;
+	--color-neutral-200: #dce0e4;
+	--color-neutral-300: #c2c8ce;
+	--color-neutral-400: #9ba3ac;
+	--color-neutral-500: #727b86;
+	--color-neutral-600: #545d68;
+	--color-neutral-700: #3c434c;
+	--color-neutral-800: #262b31;
+	--color-neutral-900: #14171b;
+
+	--color-accent-50: #fbf3e8;
+	--color-accent-100: #f5e2c4;
+	--color-accent-200: #ebc48a;
+	--color-accent-300: #dda355;
+	--color-accent-400: #c9832e;
+	--color-accent-500: #a96a20;
+	--color-accent-600: #855317;
+	--color-accent-700: #603c10;
+
+	--color-success-500: #2f7d5a;
+	--color-success-600: #24603f;
+	--color-danger-500: #b3432b;
+	--color-danger-600: #8f3320;
+}
+
+body {
+	font-family: var(--font-body);
+	color: var(--color-neutral-900);
+	background-color: var(--color-neutral-50);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-heading);
+}
