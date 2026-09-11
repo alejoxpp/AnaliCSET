@@ -1,0 +1,1 @@
+import{G as e}from"./e8wfX5ON.js";import"./DVdANi6f.js";function t(){let{subscribe:t,update:n}=e([]),r=0;function i(e){n(t=>t.filter(t=>t.id!==e))}function a(e,t=`neutral`,a=4e3){let o=r++;return n(n=>[...n,{id:o,message:e,variant:t}]),a>0&&setTimeout(()=>i(o),a),o}return{subscribe:t,add:a,remove:i}}var n=t();export{n as t};

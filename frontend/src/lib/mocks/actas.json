@@ -1,0 +1,24 @@
+{
+	"actas": [
+		{ "id": "a-256", "consecutivo": "CSET-2026-256", "fecha": "2026-09-08", "ficha": "2758421", "estado": "Procesada", "totalCasos": 5 },
+		{ "id": "a-255", "consecutivo": "CSET-2026-255", "fecha": "2026-09-06", "ficha": "2713890", "estado": "Procesada", "totalCasos": 3 },
+		{ "id": "a-254", "consecutivo": "CSET-2026-254", "fecha": "2026-09-04", "ficha": "2698112", "estado": "En revisión", "totalCasos": 7 },
+		{ "id": "a-253", "consecutivo": "CSET-2026-253", "fecha": "2026-09-02", "ficha": "2745009", "estado": "Procesada", "totalCasos": 2 },
+		{ "id": "a-252", "consecutivo": "CSET-2026-252", "fecha": "2026-08-30", "ficha": "2701334", "estado": "Procesada", "totalCasos": 4 },
+		{ "id": "a-251", "consecutivo": "CSET-2026-251", "fecha": "2026-08-28", "ficha": "2689201", "estado": "Pendiente", "totalCasos": 6 },
+		{ "id": "a-250", "consecutivo": "CSET-2026-250", "fecha": "2026-08-25", "ficha": "2772015", "estado": "Procesada", "totalCasos": 3 },
+		{ "id": "a-249", "consecutivo": "CSET-2026-249", "fecha": "2026-08-22", "ficha": "2734567", "estado": "Procesada", "totalCasos": 5 },
+		{ "id": "a-248", "consecutivo": "CSET-2026-248", "fecha": "2026-08-20", "ficha": "2718903", "estado": "En revisión", "totalCasos": 4 },
+		{ "id": "a-247", "consecutivo": "CSET-2026-247", "fecha": "2026-08-18", "ficha": "2690456", "estado": "Procesada", "totalCasos": 8 },
+		{ "id": "a-246", "consecutivo": "CSET-2026-246", "fecha": "2026-08-15", "ficha": "2756321", "estado": "Procesada", "totalCasos": 2 },
+		{ "id": "a-245", "consecutivo": "CSET-2026-245", "fecha": "2026-08-12", "ficha": "2741890", "estado": "Pendiente", "totalCasos": 5 },
+		{ "id": "a-244", "consecutivo": "CSET-2026-244", "fecha": "2026-08-10", "ficha": "2703412", "estado": "Procesada", "totalCasos": 3 },
+		{ "id": "a-243", "consecutivo": "CSET-2026-243", "fecha": "2026-08-07", "ficha": "2768901", "estado": "Procesada", "totalCasos": 6 },
+		{ "id": "a-242", "consecutivo": "CSET-2026-242", "fecha": "2026-08-05", "ficha": "2725678", "estado": "En revisión", "totalCasos": 4 },
+		{ "id": "a-241", "consecutivo": "CSET-2026-241", "fecha": "2026-08-02", "ficha": "2699087", "estado": "Procesada", "totalCasos": 7 },
+		{ "id": "a-240", "consecutivo": "CSET-2026-240", "fecha": "2026-07-30", "ficha": "2751234", "estado": "Procesada", "totalCasos": 2 },
+		{ "id": "a-239", "consecutivo": "CSET-2026-239", "fecha": "2026-07-28", "ficha": "2712345", "estado": "Procesada", "totalCasos": 5 },
+		{ "id": "a-238", "consecutivo": "CSET-2026-238", "fecha": "2026-07-25", "ficha": "2698765", "estado": "Pendiente", "totalCasos": 3 },
+		{ "id": "a-237", "consecutivo": "CSET-2026-237", "fecha": "2026-07-22", "ficha": "2743210", "estado": "Procesada", "totalCasos": 4 }
+	]
+}
