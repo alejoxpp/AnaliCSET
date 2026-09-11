@@ -1,4 +1,4 @@
-import { C as attr, n as attributes, t as attr_class, u as stringify } from "./server.js";
+import { d as stringify, r as attributes, t as attr_class, w as attr } from "./server.js";
 //#region src/lib/components/Spinner.svelte
 function Spinner($$renderer, $$props) {
 	let { size = "md", tone = "primary", label = "Cargando" } = $$props;

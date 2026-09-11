@@ -1,7 +1,7 @@
 import "./index-server.js";
 import "./internal.js";
-import { $ as set_hydrating, A as current_batch, C as init_operations, D as set, E as mutable_source, F as mark_as_component, H as hydration_failed, I as pop, J as hydrate_next, L as push, M as defer_effect, N as queue_micro_task, O as source, P as component_context, Q as set_hydrate_node, R as set_component_context, S as get_next_sibling, T as internal_set, U as svelte_boundary_reset_onerror, V as async_mode_flag, X as hydrating, Y as hydrate_node, Z as next, _ as render_effect, a as active_reaction, b as create_text, c as set_active_reaction, ct as LEGACY_PROPS, d as branch, et as skip_nodes, f as component_root, ft as define_property, g as pause_effect, h as move_effect, i as active_effect, it as HYDRATION_ERROR, j as flushSync, k as Batch, l as untrack, m as effect_tracking, o as get, ot as EFFECT_PRESERVED, p as destroy_effect, rt as svelte_boundary_reset_noop, s as set_active_effect, st as EFFECT_TRANSPARENT, tt as hydration_mismatch, u as block, ut as array_from, v as invoke_error_boundary, w as increment, x as get_first_child, y as clear_text_content } from "./shared2.js";
-import { T as is_passive_event, c as render, i as derived, x as setContext } from "./server.js";
+import { $ as set_hydrate_node, A as current_batch, C as init_operations, D as set, E as mutable_source, F as mark_as_component, H as async_mode_flag, I as pop, L as push, M as defer_effect, N as queue_micro_task, O as source, P as component_context, Q as next, R as set_component_context, S as get_next_sibling, T as internal_set, U as hydration_failed, W as svelte_boundary_reset_onerror, X as hydrate_node, Y as hydrate_next, Z as hydrating, _ as render_effect, a as active_reaction, at as HYDRATION_ERROR, b as create_text, c as set_active_reaction, ct as EFFECT_TRANSPARENT, d as branch, dt as array_from, et as set_hydrating, f as component_root, g as pause_effect, h as move_effect, i as active_effect, it as svelte_boundary_reset_noop, j as flushSync, k as Batch, l as untrack, lt as LEGACY_PROPS, m as effect_tracking, nt as hydration_mismatch, o as get, p as destroy_effect, pt as define_property, s as set_active_effect, st as EFFECT_PRESERVED, tt as skip_nodes, u as block, v as invoke_error_boundary, w as increment, x as get_first_child, y as clear_text_content } from "./shared2.js";
+import { E as is_passive_event, S as setContext, a as derived, l as render } from "./server.js";
 /**
 * `$env/dynamic/public`
 * @type {Record<string, string>}
@@ -1069,10 +1069,10 @@ var options = {
 	service_worker_options: void 0,
 	server_error_boundaries: false,
 	templates: {
-		app: ({ head, body, assets, nonce, env }) => "<!doctype html>\n<html lang=\"en\">\n	<head>\n		<meta charset=\"utf-8\" />\n		<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n		<meta name=\"text-scale\" content=\"scale\" />\n		<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" />\n		<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"anonymous\" />\n		<link\n			rel=\"stylesheet\"\n			href=\"https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap\"\n		/>\n		" + head + "\n	</head>\n	<body data-sveltekit-preload-data=\"hover\">\n		<div style=\"display: contents\">" + body + "</div>\n	</body>\n</html>\n",
+		app: ({ head, body, assets, nonce, env }) => "<!doctype html>\n<html lang=\"en\">\n	<head>\n		<meta charset=\"utf-8\" />\n		<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n		<meta name=\"text-scale\" content=\"scale\" />\n		<link rel=\"icon\" type=\"image/png\" href=\"/favicon.png\" />\n		<link rel=\"apple-touch-icon\" href=\"/logo-icon.png\" />\n		<meta name=\"theme-color\" content=\"#0D69FC\" />\n		<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" />\n		<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"anonymous\" />\n		<link\n			rel=\"stylesheet\"\n			href=\"https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap\"\n		/>\n		" + head + "\n	</head>\n	<body data-sveltekit-preload-data=\"hover\">\n		<div style=\"display: contents\">" + body + "</div>\n	</body>\n</html>\n",
 		error: error_template_default
 	},
-	version_hash: "ayre7n"
+	version_hash: "1dhgvh1"
 };
 async function get_hooks() {
 	let handle;

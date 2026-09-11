@@ -1,8 +1,8 @@
-import { _ as text_encoder, a as split_remote_key, f as get_status, g as get_relative_path, h as base64_encode, i as parse_remote_arg, n as TRAILING_SLASH_PARAM, o as stringify, p as normalize_error, r as create_remote_key, t as INVALIDATED_PARAM, v as noop, y as once } from "./chunks/shared.js";
-import { a as app_dir, c as override, l as reset, o as assets, s as base } from "./chunks/internal.js";
+import { _ as noop, a as split_remote_key, f as get_status, g as text_encoder, h as get_relative_path, i as parse_remote_arg, m as base64_encode, n as TRAILING_SLASH_PARAM, o as stringify, p as normalize_error, r as create_remote_key, t as INVALIDATED_PARAM, v as once } from "./chunks/shared.js";
+import { a as assets, c as reset, i as app_dir, o as base, s as override } from "./chunks/internal.js";
 import { D as PAGE_METHODS, T as ENDPOINT_METHODS, _ as negotiate, a as get_global_name, b as deserialize_binary_form, c as handle_fatal_error, d as redirect_response, f as serialize_uses, g as is_form_content_type, h as get_set_cookies, i as format_server_error, l as has_prerendered_path, m as escape_html, o as get_node_type, p as static_error_page, r as create_replacer, s as handle_error_and_jsonify, t as clarify_devalue_error, u as method_not_allowed } from "./chunks/utils.js";
 import { a as set_read_implementation, c as set_public_env, i as set_manifest, n as options, o as public_env, r as read_implementation, s as set_private_env, t as get_hooks } from "./chunks/internal2.js";
-import { S as compact, _ as add_resolution_suffix, b as strip_data_suffix, d as disable_search, f as make_trackable, g as add_data_suffix, h as noop_span, i as validate_page_server_exports, m as resolve, n as validate_layout_server_exports, o as find_route, p as normalize_path, r as validate_page_exports, s as hash, t as validate_layout_exports, u as decode_pathname, v as has_data_suffix, x as strip_resolution_suffix, y as has_resolution_suffix } from "./chunks/exports.js";
+import { d as make_trackable, f as normalize_path, i as validate_page_server_exports, l as decode_pathname, n as validate_layout_server_exports, o as find_route, p as resolve, r as validate_page_exports, s as hash, t as validate_layout_exports, u as disable_search } from "./chunks/exports.js";
 import { n as writable, t as readable } from "./chunks/shared2.js";
 import "./chunks/index-server2.js";
 import "./chunks/env.js";
@@ -113,6 +113,109 @@ function is_endpoint_request(event) {
 	const accept = event.request.headers.get("accept") ?? "*/*";
 	return negotiate(accept, ["*", "text/html"]) !== "text/html";
 }
+//#endregion
+//#region node_modules/@sveltejs/kit/src/utils/array.js
+/**
+* Removes nullish values from an array.
+*
+* @template T
+* @param {Array<T>} arr
+*/
+function compact(arr) {
+	return arr.filter(
+		/** @returns {val is NonNullable<T>} */
+		(val) => val != null
+	);
+}
+//#endregion
+//#region node_modules/@sveltejs/kit/src/runtime/pathname.js
+var DATA_SUFFIX = "/__data.json";
+var HTML_DATA_SUFFIX = ".html__data.json";
+/** @param {string} pathname */
+function has_data_suffix(pathname) {
+	return pathname.endsWith(DATA_SUFFIX) || pathname.endsWith(HTML_DATA_SUFFIX);
+}
+/** @param {string} pathname */
+function add_data_suffix(pathname) {
+	if (pathname.endsWith(".html")) return pathname.replace(/\.html$/, HTML_DATA_SUFFIX);
+	return pathname.replace(/\/$/, "") + DATA_SUFFIX;
+}
+/** @param {string} pathname */
+function strip_data_suffix(pathname) {
+	if (pathname.endsWith(HTML_DATA_SUFFIX)) return pathname.slice(0, -16) + ".html";
+	return pathname.slice(0, -12);
+}
+var ROUTE_SUFFIX = "/__route.js";
+/**
+* @param {string} pathname
+* @returns {boolean}
+*/
+function has_resolution_suffix(pathname) {
+	return pathname.endsWith(ROUTE_SUFFIX);
+}
+/**
+* Convert a regular URL to a route to send to SvelteKit's server-side route resolution endpoint
+* @param {string} pathname
+* @returns {string}
+*/
+function add_resolution_suffix(pathname) {
+	return pathname.replace(/\/$/, "") + ROUTE_SUFFIX;
+}
+/**
+* @param {string} pathname
+* @returns {string}
+*/
+function strip_resolution_suffix(pathname) {
+	return pathname.slice(0, -11);
+}
+//#endregion
+//#region node_modules/@sveltejs/kit/src/runtime/telemetry/noop.js
+/**
+* @type {Span}
+*/
+var noop_span = {
+	spanContext() {
+		return noop_span_context;
+	},
+	setAttribute() {
+		return this;
+	},
+	setAttributes() {
+		return this;
+	},
+	addEvent() {
+		return this;
+	},
+	setStatus() {
+		return this;
+	},
+	updateName() {
+		return this;
+	},
+	end() {
+		return this;
+	},
+	isRecording() {
+		return false;
+	},
+	recordException() {
+		return this;
+	},
+	addLink() {
+		return this;
+	},
+	addLinks() {
+		return this;
+	}
+};
+/**
+* @type {SpanContext}
+*/
+var noop_span_context = {
+	traceId: "",
+	spanId: "",
+	traceFlags: 0
+};
 //#endregion
 //#region node_modules/@sveltejs/kit/src/runtime/telemetry/record_span.js
 /** @import { RecordSpan } from 'types' */

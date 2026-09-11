@@ -1,4 +1,4 @@
-import { o as head, w as escape_html } from "../../../../../chunks/server.js";
+import { T as escape_html, s as head } from "../../../../../chunks/server.js";
 import { t as page } from "../../../../../chunks/state.js";
 import { t as Card } from "../../../../../chunks/Card.js";
 //#region src/routes/(app)/patrones/[id]/+page.svelte

@@ -1,4 +1,4 @@
-import { o as head } from "../../../../chunks/server.js";
+import { s as head } from "../../../../chunks/server.js";
 import { t as Card } from "../../../../chunks/Card.js";
 import { t as Badge } from "../../../../chunks/Badge.js";
 //#region src/routes/(app)/reportes/+page.svelte

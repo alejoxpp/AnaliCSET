@@ -5,6 +5,7 @@
 	import Badge from '$lib/components/Badge.svelte';
 	import Table from '$lib/components/Table.svelte';
 	import Spinner from '$lib/components/Spinner.svelte';
+	import Skeleton from '$lib/components/Skeleton.svelte';
 	import { toasts } from '$lib/stores/toast.js';
 
 	let nombre = $state('');
@@ -241,6 +242,15 @@
 			>
 				Alerta IA
 			</Button>
+		</div>
+	</section>
+
+	<!-- Skeleton (Loading) -->
+	<section class="space-y-3">
+		<h2 class="font-heading text-xl font-semibold text-neutral-900">Skeleton (Estados de carga)</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+			<Skeleton type="card" />
+			<Skeleton type="table" lines={3} />
 		</div>
 	</section>
 </div>

@@ -1,14 +1,13 @@
-import { i as derived, o as head } from "../../../chunks/server.js";
+import { T as escape_html, a as derived, s as head, t as attr_class, w as attr } from "../../../chunks/server.js";
+import "../../../chunks/toast.js";
 import "../../../chunks/navigation.js";
-import { t as Button } from "../../../chunks/Button.js";
 import "../../../chunks/auth.js";
-import { t as Card } from "../../../chunks/Card.js";
-import { t as Input } from "../../../chunks/Input.js";
 //#region src/routes/login/+page.svelte
 function _page($$renderer, $$props) {
 	$$renderer.component(($$renderer) => {
-		let email = "";
-		let password = "";
+		let email = "admin@sena.edu.co";
+		let password = "demo1234";
+		let rememberMe = true;
 		let submitting = false;
 		const emailError = derived(() => {
 			return "";
@@ -16,72 +15,25 @@ function _page($$renderer, $$props) {
 		const passwordError = derived(() => {
 			return "";
 		});
-		let $$settled = true;
-		let $$inner_renderer;
-		function $$render_inner($$renderer) {
-			head("1x05zx6", $$renderer, ($$renderer) => {
-				$$renderer.title(($$renderer) => {
-					$$renderer.push(`<title>Iniciar sesión · AnaliCSET</title>`);
-				});
+		head("1x05zx6", $$renderer, ($$renderer) => {
+			$$renderer.title(($$renderer) => {
+				$$renderer.push(`<title>Iniciar Sesión · AnaliCSET</title>`);
 			});
-			$$renderer.push(`<div class="flex min-h-screen items-center justify-center bg-neutral-50 px-4 py-10"><div class="w-full max-w-sm"><div class="mb-6 text-center"><div class="mx-auto flex h-12 w-12 items-center justify-center rounded-lg bg-primary-700 font-heading text-lg font-semibold text-white">CS</div> <h1 class="mt-3 font-heading text-2xl font-semibold text-neutral-900">AnaliCSET</h1> <p class="text-sm text-neutral-500">SENA · Comité de Evaluación y Seguimiento</p></div> `);
-			Card($$renderer, {
-				children: ($$renderer) => {
-					$$renderer.push(`<form class="space-y-4" novalidate="">`);
-					Input($$renderer, {
-						label: "Correo institucional",
-						type: "email",
-						error: emailError(),
-						required: true,
-						autocomplete: "username",
-						get value() {
-							return email;
-						},
-						set value($$value) {
-							email = $$value;
-							$$settled = false;
-						}
-					});
-					$$renderer.push(`<!----> `);
-					Input($$renderer, {
-						label: "Contraseña",
-						type: "password",
-						error: passwordError(),
-						required: true,
-						autocomplete: "current-password",
-						get value() {
-							return password;
-						},
-						set value($$value) {
-							password = $$value;
-							$$settled = false;
-						}
-					});
-					$$renderer.push(`<!----> `);
-					$$renderer.push("<!--[-1-->");
-					$$renderer.push(`<!--]--> `);
-					Button($$renderer, {
-						type: "submit",
-						variant: "primary",
-						loading: submitting,
-						fullWidth: true,
-						children: ($$renderer) => {
-							$$renderer.push(`<!---->Iniciar sesión`);
-						},
-						$$slots: { default: true }
-					});
-					$$renderer.push(`<!----></form>`);
-				},
-				$$slots: { default: true }
-			});
-			$$renderer.push(`<!----> <p class="mt-6 text-center text-xs text-neutral-400">Acceso exclusivo para personal autorizado del CSET.</p></div></div>`);
-		}
-		do {
-			$$settled = true;
-			$$inner_renderer = $$renderer.copy();
-			$$render_inner($$inner_renderer);
-		} while (!$$settled);
-		$$renderer.subsume($$inner_renderer);
+			$$renderer.push(`<meta name="description" content="Acceso a AnaliCSET — Plataforma de análisis inteligente de comités de evaluación y seguimiento CSET del SENA."/>`);
+		});
+		$$renderer.push(`<div class="min-h-screen w-full flex flex-col lg:flex-row bg-slate-50 lg:bg-[#080d19]"><div class="relative hidden lg:flex lg:w-1/2 min-h-screen flex-col justify-between overflow-hidden p-8 xl:p-12 border-r border-white/10" style="background: radial-gradient(circle at 20% 30%, #0d1a33 0%, #080d1a 70%, #04070e 100%);"><div class="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-accent-500/10 blur-3xl"></div> <div class="pointer-events-none absolute top-1/2 right-0 h-96 w-96 rounded-full bg-primary-600/10 blur-3xl"></div> <div class="relative z-0 space-y-4 opacity-75 select-none pointer-events-none transition-all duration-700"><div class="flex items-center justify-between border-b border-white/10 pb-4"><div class="flex items-center gap-2.5"><div class="flex h-7 w-7 items-center justify-center rounded-lg bg-white/10 p-1 ring-1 ring-white/15"><img src="/logo-icon.png" alt="" class="h-full w-full object-contain"/></div> <span class="text-xs font-bold tracking-wider text-white uppercase">ANALI CSET</span></div> <div class="flex items-center gap-2"><div class="h-2 w-2 rounded-full bg-accent-400 animate-pulse"></div> <span class="text-[11px] text-white/70">Comité Regional SENA</span></div></div> <div class="flex items-center justify-between pt-1"><div><h3 class="font-heading text-xs font-bold tracking-wider text-white/80 uppercase">PANEL DE SEGUIMIENTO CSET</h3> <p class="text-[10px] text-white/40">Periodo actual · Actas registradas 2026</p></div> <span class="rounded-md bg-accent-500/20 px-2 py-0.5 text-[10px] font-semibold text-accent-400 ring-1 ring-accent-500/30">Sistema Activo</span></div> <div class="grid grid-cols-3 gap-3"><div class="rounded-xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-xs"><span class="text-[10px] font-medium text-white/50">Casos Totales</span> <p class="mt-0.5 font-heading text-base font-bold text-white">354</p> <div class="mt-2 h-7 w-full"><svg class="h-full w-full overflow-visible" viewBox="0 0 100 28" fill="none"><path d="M0 24 Q 25 22, 45 10 T 80 14 T 100 4" stroke="#00c853" stroke-width="2" fill="none"></path><path d="M0 24 Q 25 22, 45 10 T 80 14 T 100 4 L 100 28 L 0 28 Z" fill="rgba(0, 200, 83, 0.12)"></path></svg></div></div> <div class="rounded-xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-xs"><span class="text-[10px] font-medium text-white/50">Fichas Activas</span> <p class="mt-0.5 font-heading text-base font-bold text-white">84</p> <div class="mt-2 h-7 w-full"><svg class="h-full w-full overflow-visible" viewBox="0 0 100 28" fill="none"><path d="M0 20 Q 20 12, 50 18 T 85 8 T 100 6" stroke="#00b4d8" stroke-width="2" fill="none"></path><path d="M0 20 Q 20 12, 50 18 T 85 8 T 100 6 L 100 28 L 0 28 Z" fill="rgba(0, 180, 216, 0.12)"></path></svg></div></div> <div class="rounded-xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-xs"><span class="text-[10px] font-medium text-white/50">Tasa Acuerdos</span> <p class="mt-0.5 font-heading text-base font-bold text-white">94.2%</p> <div class="mt-2 flex h-7 items-end justify-between gap-1 px-1"><div class="h-3 w-2 rounded-xs bg-white/20"></div> <div class="h-5 w-2 rounded-xs bg-white/30"></div> <div class="h-4 w-2 rounded-xs bg-white/40"></div> <div class="h-6 w-2 rounded-xs bg-accent-400"></div> <div class="h-7 w-2 rounded-xs bg-accent-500"></div></div></div></div> <div class="grid grid-cols-5 gap-3"><div class="col-span-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-xs"><div class="flex items-center justify-between text-[10px]"><span class="font-medium text-white/70">Evolución de Comités</span> <span class="text-accent-400">Mensual</span></div> <div class="mt-3 h-24 w-full"><svg class="h-full w-full" viewBox="0 0 200 80" fill="none"><line x1="0" y1="20" x2="200" y2="20" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3,3"></line><line x1="0" y1="50" x2="200" y2="50" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3,3"></line><path d="M0 65 Q 30 55, 60 25 T 120 40 T 170 15 L 200 10" stroke="#00c853" stroke-width="2.5" fill="none"></path><path d="M0 65 Q 30 55, 60 25 T 120 40 T 170 15 L 200 10 L 200 80 L 0 80 Z" fill="url(#gradLine)"></path><defs><linearGradient id="gradLine" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00c853" stop-opacity="0.25"></stop><stop offset="100%" stop-color="#00c853" stop-opacity="0"></stop></linearGradient></defs></svg></div></div> <div class="col-span-2 rounded-xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-xs flex flex-col items-center justify-center"><span class="text-[10px] font-medium text-white/70 self-start">Patrones IA</span> <div class="relative mt-2 flex h-20 w-20 items-center justify-center"><svg class="h-full w-full -rotate-90" viewBox="0 0 36 36"><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="3.5"></path><path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#00c853" stroke-dasharray="75, 100" stroke-width="3.5" stroke-linecap="round"></path></svg> <div class="absolute flex flex-col items-center"><span class="text-xs font-bold text-white">89%</span> <span class="text-[8px] text-white/50">IA</span></div></div></div></div></div> <div class="relative z-10 mt-auto pt-8"><div class="flex items-center gap-3.5 mb-3"><div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white p-1.5 shadow-lg shadow-accent-500/10 ring-1 ring-white/20"><img src="/logo-icon.png" alt="AnaliCSET" class="h-full w-full object-contain"/></div> <div><h2 class="font-heading text-2xl font-bold tracking-tight text-white flex items-center gap-2">AnaliCSET <span class="rounded-full bg-accent-500/20 px-2 py-0.5 text-[10px] font-semibold text-accent-300 ring-1 ring-accent-500/30">SENA · CSET</span></h2></div></div> <p class="text-sm text-neutral-300 leading-relaxed max-w-md mb-6 font-normal">Gestión institucional inteligente, eficiente y escalable de actas y comités de evaluación.</p> <div class="space-y-2.5 text-xs text-neutral-200"><div class="flex items-center gap-2.5"><div class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-500/20 text-accent-400"><svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg></div> <span>Gestión centralizada de actas y fichas de formación</span></div> <div class="flex items-center gap-2.5"><div class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-500/20 text-accent-400"><svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg></div> <span>Reportes y analítica de comités en tiempo real</span></div> <div class="flex items-center gap-2.5"><div class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-500/20 text-accent-400"><svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg></div> <span>Detección temprana y predictiva de patrones formativos con IA</span></div></div></div></div> <div class="w-full flex-1 min-h-screen lg:w-1/2 flex flex-col justify-center items-center p-4 sm:p-8 lg:p-16 bg-slate-50 relative overflow-hidden"><div class="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-accent-500/5 blur-3xl lg:hidden"></div> <div class="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-primary-600/5 blur-3xl lg:hidden"></div> <div class="w-full max-w-[420px] my-auto bg-white rounded-2xl sm:rounded-3xl border border-neutral-200/80 shadow-xs p-6 sm:p-8 lg:bg-transparent lg:border-0 lg:shadow-none lg:p-0 relative z-10"><div class="lg:hidden mb-6 flex items-center gap-3"><div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-neutral-50 p-2 shadow-2xs border border-neutral-200/80"><img src="/logo-icon.png" alt="AnaliCSET" class="h-full w-full object-contain"/></div> <div><div class="flex items-center gap-2"><span class="font-heading text-lg font-bold text-neutral-900 leading-tight">AnaliCSET</span> <span class="rounded-full bg-accent-500/10 px-2 py-0.5 text-[10px] font-semibold text-accent-700 ring-1 ring-accent-500/20">SENA · CSET</span></div> <p class="text-[11px] text-neutral-500">Comité de Evaluación y Seguimiento</p></div></div> <div class="mb-6"><h1 class="font-heading text-2xl sm:text-3xl font-bold text-neutral-900 tracking-tight">Iniciar sesión</h1> <p class="mt-1.5 text-sm text-neutral-500">Ingresa tus credenciales institucionales para acceder.</p></div> <div class="mb-5 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-neutral-200/80 bg-neutral-100/70 px-3 py-2 text-xs"><span class="text-neutral-500 font-medium">Acceso demo:</span> <div class="flex items-center gap-1.5"><button type="button" class="rounded bg-white px-2 py-0.5 text-[11px] font-semibold text-neutral-700 shadow-2xs hover:bg-neutral-50 border border-neutral-200 cursor-pointer">Admin</button> <button type="button" class="rounded bg-white px-2 py-0.5 text-[11px] font-semibold text-neutral-700 shadow-2xs hover:bg-neutral-50 border border-neutral-200 cursor-pointer">Coordinación</button></div></div> <form class="space-y-4" novalidate=""><div class="space-y-1.5"><label for="email" class="block text-xs font-semibold text-neutral-700">Correo institucional</label> <input id="email" type="email"${attr("value", email)} autocomplete="username" placeholder="usuario@sena.edu.co"${attr_class(`w-full rounded-xl border bg-white px-4 py-3 text-sm text-neutral-900 placeholder:text-neutral-400 shadow-2xs transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-0 ${emailError() ? "border-danger-500 focus:ring-danger-500/20" : "border-neutral-200 focus:border-accent-500 focus:ring-accent-500/20"}`)}/> `);
+		if (emailError()) $$renderer.push(`<!--[0--><p class="text-xs text-danger-600">${escape_html(emailError())}</p>`);
+		else $$renderer.push("<!--[-1-->");
+		$$renderer.push(`<!--]--></div> <div class="space-y-1.5"><label for="password" class="block text-xs font-semibold text-neutral-700">Contraseña</label> <div class="relative"><input id="password"${attr("type", "password")}${attr("value", password)} autocomplete="current-password" placeholder="••••••••"${attr_class(`w-full rounded-xl border bg-white px-4 py-3 pr-11 text-sm text-neutral-900 placeholder:text-neutral-400 shadow-2xs transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-0 ${passwordError() ? "border-danger-500 focus:ring-danger-500/20" : "border-neutral-200 focus:border-accent-500 focus:ring-accent-500/20"}`)}/> <button type="button" class="absolute inset-y-0 right-0 flex items-center pr-3.5 text-neutral-400 hover:text-neutral-600 focus:outline-none cursor-pointer"${attr("aria-label", "Ver contraseña")}>`);
+		$$renderer.push(`<!--[-1--><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>`);
+		$$renderer.push(`<!--]--></button></div> `);
+		if (passwordError()) $$renderer.push(`<!--[0--><p class="text-xs text-danger-600">${escape_html(passwordError())}</p>`);
+		else $$renderer.push("<!--[-1-->");
+		$$renderer.push(`<!--]--></div> <div class="flex items-center gap-2.5 pt-1"><input id="remember" type="checkbox"${attr("checked", rememberMe, true)} class="h-4 w-4 rounded border-neutral-300 text-accent-500 focus:ring-accent-500/30 focus:ring-offset-0 cursor-pointer"/> <label for="remember" class="text-xs text-neutral-600 select-none cursor-pointer">Recordarme por 30 días</label></div> `);
+		$$renderer.push("<!--[-1-->");
+		$$renderer.push(`<!--]--> <button type="submit"${attr("disabled", submitting, true)} class="w-full rounded-xl bg-accent-500 hover:bg-accent-600 active:scale-[0.99] text-white font-semibold py-3 px-4 text-sm shadow-sm transition-all duration-150 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">`);
+		$$renderer.push(`<!--[-1--><span>Iniciar Sesión</span>`);
+		$$renderer.push(`<!--]--></button></form> <div class="mt-8 border-t border-neutral-200 pt-4 text-center"><p class="text-[11px] text-neutral-400">Plataforma de uso exclusivo para personal autorizado del SENA · CSET</p></div></div></div></div>`);
 	});
 }
 //#endregion

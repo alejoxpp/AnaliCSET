@@ -1,4 +1,4 @@
-import { G as lifecycle_outside_component, K as missing_context, V as async_mode_flag, at as UNINITIALIZED, dt as deferred, ht as noop, lt as STALE_REACTION, mt as is_array, pt as has_own_property, r as subscribe_to_store, z as get_stack } from "./shared2.js";
+import { H as async_mode_flag, K as lifecycle_outside_component, ft as deferred, gt as noop, ht as is_array, mt as has_own_property, ot as UNINITIALIZED, q as missing_context, r as subscribe_to_store, ut as STALE_REACTION, z as get_stack } from "./shared2.js";
 import * as devalue from "devalue";
 import { clsx } from "clsx";
 //#region node_modules/svelte/src/internal/shared/context.js
@@ -1395,6 +1395,14 @@ function attr_class(value, hash, directives) {
 	return result ? ` class="${escape_html(result, true)}"` : "";
 }
 /**
+* @param {any} value
+* @param {Record<string,any>|[Record<string,any>,Record<string,any>]} [directives]
+*/
+function attr_style(value, directives) {
+	var result = to_style(value, directives);
+	return result ? ` style="${escape_html(result, true)}"` : "";
+}
+/**
 * @template V
 * @param {Record<string, [any, any, any]>} store_values
 * @param {string} store_name
@@ -1476,4 +1484,4 @@ function derived(fn) {
 	};
 }
 //#endregion
-export { attr as C, ssr_context as S, is_passive_event as T, createContext as _, ensure_array_like as a, hasContext as b, render as c, unsubscribe_stores as d, get_user_code_location as f, lifecycle_function_unavailable as g, hydratable_serialization_failed as h, derived as i, store_get as l, hydratable_clobbering as m, attributes as n, head as o, get_render_context as p, bind_props as r, props_id as s, attr_class as t, stringify as u, getAllContexts as v, escape_html as w, setContext as x, getContext as y };
+export { ssr_context as C, is_passive_event as E, setContext as S, escape_html as T, lifecycle_function_unavailable as _, derived as a, getContext as b, props_id as c, stringify as d, unsubscribe_stores as f, hydratable_serialization_failed as g, hydratable_clobbering as h, bind_props as i, render as l, get_render_context as m, attr_style as n, ensure_array_like as o, get_user_code_location as p, attributes as r, head as s, attr_class as t, store_get as u, createContext as v, attr as w, hasContext as x, getAllContexts as y };

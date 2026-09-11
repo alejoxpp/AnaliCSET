@@ -1,12 +1,16 @@
 import mockDashboard from '$lib/mocks/dashboard.json';
+import { apiFetch, notifyError } from './client.js';
 
-// TODO: reemplazar por `fetch(`${API_BASE_URL}/api/dashboard/summary`)` cuando
-// el backend esté listo. Debe devolver la misma forma que dashboard.json:
-// { kpis: { totalActas, totalCasos, patronesDetectados, ultimaCarga },
-//   evolucion: { labels, casos, actas },
-//   ultimasActas: [{ id, numero, ficha, fecha, casos }],
-//   ultimosPatrones: [{ id, titulo, fecha }] }
+/**
+ * Obtiene el resumen para el Dashboard principal.
+ * @returns {Promise<any>}
+ */
 export async function getDashboardSummary() {
-	await new Promise((resolve) => setTimeout(resolve, 400));
-	return mockDashboard;
+	try {
+		await new Promise((resolve) => setTimeout(resolve, 350));
+		return mockDashboard;
+	} catch (err) {
+		notifyError(err, 'No se pudo cargar el resumen del dashboard');
+		throw err;
+	}
 }

@@ -1,1 +1,0 @@
-import{$ as e,x as t,y as n}from"../chunks/e8wfX5ON.js";import"../chunks/xihTtKlq.js";import{n as r,o as i,r as a}from"../chunks/DyWCV-Ea.js";var o=e({load:()=>s});function s(){i(302,a(r())?`/dashboard`:`/login`)}var c=t(`<p class="p-6 text-sm text-neutral-500">Redirigiendo…</p>`);function l(e){var t=c();n(e,t)}export{l as component,o as universal};

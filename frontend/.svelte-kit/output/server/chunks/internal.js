@@ -22,13 +22,10 @@ function reset() {
 function set_assets(path) {
 	assets = initial.assets = path;
 }
-//#endregion
-//#region node_modules/@sveltejs/kit/src/runtime/app/env/internal.js
-var version = "1789144702104";
 var prerendering = false;
 function set_building() {}
 function set_prerendering() {
 	prerendering = true;
 }
 //#endregion
-export { app_dir as a, override as c, version as i, reset as l, set_building as n, assets as o, set_prerendering as r, base as s, prerendering as t, set_assets as u };
+export { assets as a, reset as c, app_dir as i, set_assets as l, set_building as n, base as o, set_prerendering as r, override as s, prerendering as t };

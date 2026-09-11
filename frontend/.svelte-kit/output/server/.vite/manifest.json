@@ -30,11 +30,27 @@
       "_server.js"
     ]
   },
-  "_Input.js": {
-    "file": "chunks/Input.js",
-    "name": "Input",
+  "_ChartWrapper.js": {
+    "file": "chunks/ChartWrapper.js",
+    "name": "ChartWrapper",
+    "imports": [
+      "_index-server.js",
+      "_shared2.js",
+      "_server.js"
+    ]
+  },
+  "_Skeleton.js": {
+    "file": "chunks/Skeleton.js",
+    "name": "Skeleton",
     "imports": [
       "_server.js"
+    ]
+  },
+  "_actas.js": {
+    "file": "chunks/actas.js",
+    "name": "actas",
+    "imports": [
+      "_client2.js"
     ]
   },
   "_auth.js": {
@@ -59,9 +75,24 @@
       "_index-server2.js"
     ]
   },
+  "_client2.js": {
+    "file": "chunks/client2.js",
+    "name": "client",
+    "imports": [
+      "_toast.js",
+      "_auth.js"
+    ]
+  },
   "_env.js": {
     "file": "chunks/env.js",
     "name": "env"
+  },
+  "_estadisticas.js": {
+    "file": "chunks/estadisticas.js",
+    "name": "estadisticas",
+    "imports": [
+      "_client2.js"
+    ]
   },
   "_exports.js": {
     "file": "chunks/exports.js",
@@ -194,12 +225,21 @@
     "src": "src/routes/(app)/+layout.svelte",
     "isEntry": true,
     "imports": [
+      "_index-server.js",
+      "_shared2.js",
       "_server.js",
-      "_client.js",
       "_state.js",
       "_navigation.js",
-      "_Button.js",
       "_auth.js"
+    ]
+  },
+  "src/routes/(app)/actas/+page.js": {
+    "file": "entries/pages/(app)/actas/_page.js",
+    "name": "entries/pages/(app)/actas/_page",
+    "src": "src/routes/(app)/actas/+page.js",
+    "isEntry": true,
+    "imports": [
+      "_actas.js"
     ]
   },
   "src/routes/(app)/actas/+page.svelte": {
@@ -209,14 +249,47 @@
     "isEntry": true,
     "imports": [
       "_server.js",
-      "_Card.js"
+      "_toast.js",
+      "_state.js",
+      "_navigation.js",
+      "_Card.js",
+      "_Badge.js",
+      "_Button.js",
+      "_Skeleton.js"
+    ]
+  },
+  "src/routes/(app)/actas/[id]/+page.js": {
+    "file": "entries/pages/(app)/actas/_id_/_page.js",
+    "name": "entries/pages/(app)/actas/_id_/_page",
+    "src": "src/routes/(app)/actas/[id]/+page.js",
+    "isEntry": true,
+    "imports": [
+      "_actas.js",
+      "_client2.js"
+    ]
+  },
+  "src/routes/(app)/actas/[id]/+page.svelte": {
+    "file": "entries/pages/(app)/actas/_id_/_page.svelte.js",
+    "name": "entries/pages/(app)/actas/_id_/_page.svelte",
+    "src": "src/routes/(app)/actas/[id]/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_server.js",
+      "_toast.js",
+      "_state.js",
+      "_Card.js",
+      "_Badge.js",
+      "_Button.js"
     ]
   },
   "src/routes/(app)/dashboard/+page.js": {
     "file": "entries/pages/(app)/dashboard/_page.js",
     "name": "entries/pages/(app)/dashboard/_page",
     "src": "src/routes/(app)/dashboard/+page.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_client2.js"
+    ]
   },
   "src/routes/(app)/dashboard/+page.svelte": {
     "file": "entries/pages/(app)/dashboard/_page.svelte.js",
@@ -224,10 +297,19 @@
     "src": "src/routes/(app)/dashboard/+page.svelte",
     "isEntry": true,
     "imports": [
-      "_index-server.js",
-      "_shared2.js",
       "_server.js",
-      "_Card.js"
+      "_Card.js",
+      "_Badge.js",
+      "_ChartWrapper.js"
+    ]
+  },
+  "src/routes/(app)/estadisticas/+page.js": {
+    "file": "entries/pages/(app)/estadisticas/_page.js",
+    "name": "entries/pages/(app)/estadisticas/_page",
+    "src": "src/routes/(app)/estadisticas/+page.js",
+    "isEntry": true,
+    "imports": [
+      "_estadisticas.js"
     ]
   },
   "src/routes/(app)/estadisticas/+page.svelte": {
@@ -237,7 +319,13 @@
     "isEntry": true,
     "imports": [
       "_server.js",
-      "_Card.js"
+      "_toast.js",
+      "_Card.js",
+      "_Badge.js",
+      "_Button.js",
+      "_Skeleton.js",
+      "_ChartWrapper.js",
+      "_estadisticas.js"
     ]
   },
   "src/routes/(app)/patrones/[id]/+page.svelte": {
@@ -278,7 +366,7 @@
       "_toast.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout.BRrFH0vP.css"
+      "_app/immutable/assets/_layout.BzANrgFf.css"
     ]
   },
   "src/routes/+page.js": {
@@ -307,10 +395,10 @@
     "imports": [
       "_server.js",
       "_toast.js",
-      "_Button.js",
       "_Card.js",
       "_Badge.js",
-      "_Input.js"
+      "_Button.js",
+      "_Skeleton.js"
     ]
   },
   "src/routes/login/+page.js": {
@@ -329,11 +417,9 @@
     "isEntry": true,
     "imports": [
       "_server.js",
+      "_toast.js",
       "_navigation.js",
-      "_Button.js",
-      "_auth.js",
-      "_Card.js",
-      "_Input.js"
+      "_auth.js"
     ]
   },
   "virtual:__sveltekit/env": {

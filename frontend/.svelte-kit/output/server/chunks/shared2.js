@@ -265,6 +265,80 @@ function svelte_boundary_reset_onerror() {
 var async_mode_flag = false;
 /** True if we're not certain that we only have Svelte 5 code in the compilation */
 var legacy_mode_flag = false;
+//#endregion
+//#region node_modules/svelte/src/internal/shared/clone.js
+/** @import { Snapshot } from './types' */
+/**
+* In dev, we keep track of which properties could not be cloned. In prod
+* we don't bother, but we keep a dummy array around so that the
+* signature stays the same
+* @type {string[]}
+*/
+var empty = [];
+/**
+* @template T
+* @param {T} value
+* @param {boolean} [skip_warning]
+* @param {boolean} [no_tojson]
+* @returns {Snapshot<T>}
+*/
+function snapshot(value, skip_warning = false, no_tojson = false) {
+	return clone(value, /* @__PURE__ */ new Map(), "", empty, null, no_tojson);
+}
+/**
+* @template T
+* @param {T} value
+* @param {Map<T, Snapshot<T>>} cloned
+* @param {string} path
+* @param {string[]} paths
+* @param {null | T} [original] The original value, if `value` was produced from a `toJSON` call
+* @param {boolean} [no_tojson]
+* @returns {Snapshot<T>}
+*/
+function clone(value, cloned, path, paths, original = null, no_tojson = false) {
+	if (typeof value === "object" && value !== null) {
+		var unwrapped = cloned.get(value);
+		if (unwrapped !== void 0) return unwrapped;
+		if (value instanceof Map) return new Map(value);
+		if (value instanceof Set) return new Set(value);
+		if (is_array(value)) {
+			var copy = Array(value.length);
+			cloned.set(value, copy);
+			if (original !== null) cloned.set(original, copy);
+			for (var i = 0; i < value.length; i += 1) {
+				var element = value[i];
+				if (i in value) copy[i] = clone(element, cloned, path, paths, null, no_tojson);
+			}
+			return copy;
+		}
+		if (get_prototype_of(value) === object_prototype) {
+			/** @type {Snapshot<any>} */
+			copy = {};
+			cloned.set(value, copy);
+			if (original !== null) cloned.set(original, copy);
+			for (var key of Object.keys(value)) copy[key] = clone(value[key], cloned, path, paths, null, no_tojson);
+			return copy;
+		}
+		if (value instanceof Date) {
+			value.getTime();
+			return structuredClone(value);
+		}
+		if (typeof value.toJSON === "function" && !no_tojson) return clone(
+			/** @type {T & { toJSON(): any } } */
+			value.toJSON(),
+			cloned,
+			path,
+			paths,
+			value
+		);
+	}
+	if (value instanceof EventTarget) return value;
+	try {
+		return structuredClone(value);
+	} catch (e) {
+		return value;
+	}
+}
 /**
 * @param {Value} source
 * @param {string} label
@@ -2434,4 +2508,4 @@ function writable(value, start = noop) {
 	};
 }
 //#endregion
-export { set_hydrating as $, current_batch as A, tag as B, init_operations as C, set as D, mutable_source as E, mark_as_component as F, lifecycle_outside_component as G, hydration_failed as H, pop as I, hydrate_next as J, missing_context as K, push as L, defer_effect as M, queue_micro_task as N, source as O, component_context as P, set_hydrate_node as Q, set_component_context as R, get_next_sibling as S, internal_set as T, svelte_boundary_reset_onerror as U, async_mode_flag as V, experimental_async_required as W, hydrating as X, hydrate_node as Y, next as Z, render_effect as _, active_reaction as a, UNINITIALIZED as at, create_text as b, set_active_reaction as c, LEGACY_PROPS as ct, branch as d, deferred as dt, skip_nodes as et, component_root as f, define_property as ft, pause_effect as g, run as gt, move_effect as h, noop as ht, active_effect as i, HYDRATION_ERROR as it, flushSync as j, Batch as k, untrack as l, STALE_REACTION as lt, effect_tracking as m, is_array as mt, writable as n, lifecycle_double_unmount as nt, get as o, EFFECT_PRESERVED as ot, destroy_effect as p, has_own_property as pt, store_invalid_shape as q, subscribe_to_store as r, svelte_boundary_reset_noop as rt, set_active_effect as s, EFFECT_TRANSPARENT as st, readable as t, hydration_mismatch as tt, block as u, array_from as ut, invoke_error_boundary as v, increment as w, get_first_child as x, clear_text_content as y, get_stack as z };
+export { set_hydrate_node as $, current_batch as A, tag as B, init_operations as C, set as D, mutable_source as E, mark_as_component as F, experimental_async_required as G, async_mode_flag as H, pop as I, store_invalid_shape as J, lifecycle_outside_component as K, push as L, defer_effect as M, queue_micro_task as N, source as O, component_context as P, next as Q, set_component_context as R, get_next_sibling as S, internal_set as T, hydration_failed as U, snapshot as V, svelte_boundary_reset_onerror as W, hydrate_node as X, hydrate_next as Y, hydrating as Z, render_effect as _, run as _t, active_reaction as a, HYDRATION_ERROR as at, create_text as b, set_active_reaction as c, EFFECT_TRANSPARENT as ct, branch as d, array_from as dt, set_hydrating as et, component_root as f, deferred as ft, pause_effect as g, noop as gt, move_effect as h, is_array as ht, active_effect as i, svelte_boundary_reset_noop as it, flushSync as j, Batch as k, untrack as l, LEGACY_PROPS as lt, effect_tracking as m, has_own_property as mt, writable as n, hydration_mismatch as nt, get as o, UNINITIALIZED as ot, destroy_effect as p, define_property as pt, missing_context as q, subscribe_to_store as r, lifecycle_double_unmount as rt, set_active_effect as s, EFFECT_PRESERVED as st, readable as t, skip_nodes as tt, block as u, STALE_REACTION as ut, invoke_error_boundary as v, increment as w, get_first_child as x, clear_text_content as y, get_stack as z };

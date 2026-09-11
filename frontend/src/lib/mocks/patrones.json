@@ -1,0 +1,44 @@
+{
+	"patrones": [
+		{
+			"id": "pat-01",
+			"nombre": "Reincidencia en inasistencia no justificada",
+			"descripcion": "El 65% de los aprendices citados por inasistencia en etapa lectiva presentan ausencias reiteradas los días lunes y viernes en fichas de horario nocturno.",
+			"porcentaje": 28,
+			"nivel_riesgo": "Alto",
+			"actas_asociadas": ["a-256", "a-255", "a-254"]
+		},
+		{
+			"id": "pat-02",
+			"nombre": "Pico de deserción en transición a etapa productiva",
+			"descripcion": "Se detecta abandono voluntario o pérdida de contacto en semanas 10-12 previo al inicio del contrato de aprendizaje.",
+			"porcentaje": 22,
+			"nivel_riesgo": "Crítico",
+			"actas_asociadas": ["a-256", "a-255"]
+		},
+		{
+			"id": "pat-03",
+			"nombre": "Correlación rendimiento-instructor en áreas técnicas",
+			"descripcion": "Concentración atípica de juicios 'No Aprobado' en competencias de despliegue en la nube y contenedores.",
+			"porcentaje": 18,
+			"nivel_riesgo": "Medio",
+			"actas_asociadas": ["a-256", "a-253"]
+		},
+		{
+			"id": "pat-04",
+			"nombre": "Patrón estacional post-receso formativo",
+			"descripcion": "Incremento de citaciones por bajo compromiso académico durante las 3 semanas posteriores a vacaciones.",
+			"porcentaje": 16,
+			"nivel_riesgo": "Medio",
+			"actas_asociadas": ["a-252", "a-250"]
+		},
+		{
+			"id": "pat-05",
+			"nombre": "Acumulación de sanciones leves sin seguimiento",
+			"descripcion": "Aprendices con dos o más llamados de atención previos sin plan de mejoramiento formal radicado en coordinación.",
+			"porcentaje": 16,
+			"nivel_riesgo": "Alto",
+			"actas_asociadas": ["a-256", "a-251"]
+		}
+	]
+}

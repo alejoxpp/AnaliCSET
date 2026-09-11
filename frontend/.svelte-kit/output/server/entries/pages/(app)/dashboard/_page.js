@@ -1,3 +1,4 @@
+import { t as notifyError } from "../../../../chunks/client2.js";
 var dashboard_default = {
 	kpis: {
 		"totalActas": 128,
@@ -21,8 +22,53 @@ var dashboard_default = {
 			40,
 			31,
 			46
+		],
+		"actas": [
+			8,
+			14,
+			11,
+			18,
+			15,
+			22
 		]
 	},
+	ultimasActas: [
+		{
+			"id": "a-256",
+			"numero": "CSET-2026-256",
+			"ficha": "2758421",
+			"fecha": "2026-09-08",
+			"casos": 5
+		},
+		{
+			"id": "a-255",
+			"numero": "CSET-2026-255",
+			"ficha": "2713890",
+			"fecha": "2026-09-06",
+			"casos": 3
+		},
+		{
+			"id": "a-254",
+			"numero": "CSET-2026-254",
+			"ficha": "2698112",
+			"fecha": "2026-09-04",
+			"casos": 7
+		},
+		{
+			"id": "a-253",
+			"numero": "CSET-2026-253",
+			"ficha": "2745009",
+			"fecha": "2026-09-02",
+			"casos": 2
+		},
+		{
+			"id": "a-252",
+			"numero": "CSET-2026-252",
+			"ficha": "2701334",
+			"fecha": "2026-08-30",
+			"casos": 4
+		}
+	],
 	ultimosPatrones: [
 		{
 			"id": "p-104",
@@ -43,9 +89,18 @@ var dashboard_default = {
 };
 //#endregion
 //#region src/lib/api/dashboard.js
+/**
+* Obtiene el resumen para el Dashboard principal.
+* @returns {Promise<any>}
+*/
 async function getDashboardSummary() {
-	await new Promise((resolve) => setTimeout(resolve, 400));
-	return dashboard_default;
+	try {
+		await new Promise((resolve) => setTimeout(resolve, 350));
+		return dashboard_default;
+	} catch (err) {
+		notifyError(err, "No se pudo cargar el resumen del dashboard");
+		throw err;
+	}
 }
 //#endregion
 //#region src/routes/(app)/dashboard/+page.js
