@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { user, clearSession } from '$lib/stores/auth.js';
+	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 
 	let { ontogglemenu = () => {} } = $props();
 
@@ -39,12 +40,14 @@
 	});
 </script>
 
-<header class="flex items-center justify-between border-b border-neutral-200 bg-white px-4 py-3 sm:px-6 print:hidden">
+<header
+	class="flex items-center justify-between border-b border-neutral-200 bg-white px-4 py-3 sm:px-6 dark:border-neutral-800 dark:bg-neutral-900 print:hidden"
+>
 	<!-- Lado izquierdo: Botón menú hamburguesa (móvil/tablet) + Título -->
 	<div class="flex items-center gap-2.5 min-w-0 flex-1 mr-2">
 		<button
 			type="button"
-			class="inline-flex shrink-0 items-center justify-center rounded-lg p-2 text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 lg:hidden cursor-pointer"
+			class="inline-flex shrink-0 items-center justify-center rounded-lg p-2 text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-white lg:hidden cursor-pointer"
 			onclick={ontogglemenu}
 			aria-label="Abrir menú de navegación"
 		>
@@ -53,25 +56,29 @@
 			</svg>
 		</button>
 
-		<h1 class="font-heading text-base font-bold text-neutral-900 sm:text-xl truncate">
+		<h1 class="font-heading text-base font-bold text-neutral-900 sm:text-xl truncate dark:text-neutral-50">
 			{sectionTitle}
 		</h1>
 	</div>
 
-	<!-- Lado derecho: Usuario y logout -->
+	<!-- Lado derecho: Tema, usuario y logout -->
 	<div class="flex items-center gap-3">
+		<ThemeToggle />
+
 		{#if $user}
 			<!-- Avatar con iniciales -->
 			<div
-				class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-100 text-xs font-bold text-primary-800 ring-1 ring-primary-200"
+				class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-100 text-xs font-bold text-primary-800 ring-1 ring-primary-200 dark:bg-primary-500/20 dark:text-primary-200 dark:ring-primary-500/30"
 				title={$user.name}
 				aria-label="Perfil de {$user.name}"
 			>
 				{initials}
 			</div>
 			<div class="hidden text-right sm:block">
-				<p class="text-sm font-semibold leading-tight text-neutral-900">{$user.name}</p>
-				<p class="text-xs text-neutral-600">{$user.role}</p>
+				<p class="text-sm font-semibold leading-tight text-neutral-900 dark:text-neutral-50">
+					{$user.name}
+				</p>
+				<p class="text-xs text-neutral-600 dark:text-neutral-400">{$user.role}</p>
 			</div>
 		{/if}
 
@@ -79,7 +86,7 @@
 		<button
 			type="button"
 			onclick={handleLogout}
-			class="inline-flex items-center gap-1.5 rounded-md border border-neutral-300 bg-white px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-50 hover:text-danger-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 cursor-pointer"
+			class="inline-flex items-center gap-1.5 rounded-md border border-neutral-300 bg-white px-3 py-1.5 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-50 hover:text-danger-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-danger-500 cursor-pointer"
 			aria-label="Cerrar sesión de usuario"
 			title="Cerrar sesión"
 		>

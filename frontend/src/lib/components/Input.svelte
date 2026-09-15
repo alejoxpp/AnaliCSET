@@ -16,7 +16,7 @@
 
 <div class="flex flex-col gap-1">
 	{#if label}
-		<label for={inputId} class="text-sm font-medium text-neutral-700">
+		<label for={inputId} class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
 			{label}
 			{#if required}<span class="text-danger-500">*</span>{/if}
 		</label>
@@ -31,9 +31,10 @@
 		aria-describedby={error ? `${inputId}-error` : undefined}
 		class="rounded-md border bg-white px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400
 			focus:outline-none focus:ring-2 focus:ring-offset-0 disabled:cursor-not-allowed disabled:bg-neutral-100
+			dark:bg-neutral-900 dark:text-neutral-100 dark:placeholder:text-neutral-500 dark:disabled:bg-neutral-800
 			{error
 			? 'border-danger-500 focus:ring-danger-500'
-			: 'border-neutral-300 focus:ring-primary-500'}"
+			: 'border-neutral-300 focus:ring-primary-500 dark:border-neutral-700'}"
 		{...rest}
 	/>
 	{#if error}

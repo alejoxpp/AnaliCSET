@@ -12,7 +12,7 @@ function Input($$renderer, $$props) {
 		const inputId = derived(() => id ?? uid);
 		$$renderer.push(`<div class="flex flex-col gap-1">`);
 		if (label) {
-			$$renderer.push(`<!--[0--><label${attr("for", inputId())} class="text-sm font-medium text-neutral-700">${escape_html(label)} `);
+			$$renderer.push(`<!--[0--><label${attr("for", inputId())} class="text-sm font-medium text-neutral-700 dark:text-neutral-300">${escape_html(label)} `);
 			if (required) $$renderer.push(`<!--[0--><span class="text-danger-500">*</span>`);
 			else $$renderer.push("<!--[-1-->");
 			$$renderer.push(`<!--]--></label>`);
@@ -25,7 +25,7 @@ function Input($$renderer, $$props) {
 			value,
 			"aria-invalid": error ? "true" : void 0,
 			"aria-describedby": error ? `${inputId()}-error` : void 0,
-			class: `rounded-md border bg-white px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-offset-0 disabled:cursor-not-allowed disabled:bg-neutral-100 ${error ? "border-danger-500 focus:ring-danger-500" : "border-neutral-300 focus:ring-primary-500"}`,
+			class: `rounded-md border bg-white px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-offset-0 disabled:cursor-not-allowed disabled:bg-neutral-100 dark:bg-neutral-900 dark:text-neutral-100 dark:placeholder:text-neutral-500 dark:disabled:bg-neutral-800 ${error ? "border-danger-500 focus:ring-danger-500" : "border-neutral-300 focus:ring-primary-500 dark:border-neutral-700"}`,
 			...rest
 		}, void 0, void 0, void 0, 4)}/> `);
 		if (error) $$renderer.push(`<!--[0--><p${attr("id", `${stringify(inputId())}-error`)} class="text-sm text-danger-500">${escape_html(error)}</p>`);
@@ -38,12 +38,12 @@ function Input($$renderer, $$props) {
 //#region src/lib/components/Table.svelte
 function Table($$renderer, $$props) {
 	let { caption = "", head, children } = $$props;
-	$$renderer.push(`<div class="overflow-x-auto rounded-lg border border-neutral-200"><table class="w-full border-collapse text-left text-sm">`);
+	$$renderer.push(`<div class="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800"><table class="w-full border-collapse text-left text-sm">`);
 	if (caption) $$renderer.push(`<!--[0--><caption class="sr-only">${escape_html(caption)}</caption>`);
 	else $$renderer.push("<!--[-1-->");
-	$$renderer.push(`<!--]--><thead class="bg-neutral-50 text-xs font-medium tracking-wide text-neutral-600 uppercase">`);
+	$$renderer.push(`<!--]--><thead class="bg-neutral-50 text-xs font-medium tracking-wide text-neutral-600 uppercase dark:bg-neutral-800/60 dark:text-neutral-300">`);
 	head?.($$renderer);
-	$$renderer.push(`<!----></thead><tbody class="divide-y divide-neutral-200 text-neutral-800">`);
+	$$renderer.push(`<!----></thead><tbody class="divide-y divide-neutral-200 text-neutral-800 dark:divide-neutral-800 dark:text-neutral-200">`);
 	children?.($$renderer);
 	$$renderer.push(`<!----></tbody></table></div>`);
 }

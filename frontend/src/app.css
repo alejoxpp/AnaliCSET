@@ -1,6 +1,13 @@
 @import 'tailwindcss';
 
 /*
+ * Modo oscuro por clase (.dark en <html>), controlado desde
+ * $lib/stores/theme.js. En Tailwind v4 esto reemplaza al antiguo
+ * darkMode: 'class' de tailwind.config.js, que ya no existe.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
  * Tokens de marca de AnaliCSET.
  * Paleta derivada del logo oficial:
  *   • Primary (Azul eléctrico) — burbuja del logo (#0D69FC)
@@ -37,6 +44,7 @@
 	--color-neutral-700: #334155;
 	--color-neutral-800: #1e293b;
 	--color-neutral-900: #0f172a;
+	--color-neutral-950: #020617; /* Fondo base del modo oscuro */
 
 	/* ── Accent: Verde esmeralda del sparkle IA ─────────────────────── */
 	--color-accent-50: #ecfdf5;
@@ -71,6 +79,20 @@ body {
 	font-family: var(--font-body);
 	color: var(--color-neutral-900);
 	background-color: var(--color-neutral-50);
+	transition:
+		background-color 0.2s ease,
+		color 0.2s ease;
+}
+
+.dark body {
+	color: var(--color-neutral-100);
+	background-color: var(--color-neutral-950);
+}
+
+/* El navegador pinta controles nativos (scrollbars, date pickers, selects)
+   según este esquema; sin esto se ven claros sobre fondo oscuro. */
+.dark {
+	color-scheme: dark;
 }
 
 h1,
@@ -195,4 +217,83 @@ h6 {
 }
 ::-webkit-scrollbar-thumb:hover {
 	background: var(--color-neutral-400);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+	background: var(--color-neutral-700);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+	background: var(--color-neutral-600);
+}
+
+/* ── Accesibilidad: respetar preferencia de movimiento reducido ──────── */
+@media (prefers-reduced-motion: reduce) {
+	.animate-fade-in,
+	.animate-fade-in-up,
+	.animate-slide-in-left,
+	.animate-subtle-glow {
+		animation: none;
+	}
+
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0.01ms !important;
+	}
+}
+
+/* ── Impresión / Generar reporte ─────────────────────────────────────── */
+@media print {
+	@page {
+		margin: 1.4cm;
+	}
+
+	/* El informe siempre se imprime en claro, aunque la app esté en modo
+	   oscuro: ahorra tinta y es lo esperable en un documento institucional. */
+	.dark body,
+	body {
+		background: #fff !important;
+		color: #000 !important;
+	}
+
+	/* Fuerza a imprimir fondos y colores de gráficos, badges y anillos de
+	   progreso, que por defecto el navegador descarta. */
+	* {
+		-webkit-print-color-adjust: exact !important;
+		print-color-adjust: exact !important;
+	}
+
+	/* Sin animaciones de entrada: dejarían elementos a medio aparecer. */
+	.animate-fade-in,
+	.animate-fade-in-up,
+	.animate-slide-in-left,
+	.animate-subtle-glow {
+		animation: none !important;
+		opacity: 1 !important;
+		transform: none !important;
+	}
+
+	/* Evita cortar tarjetas, tablas y gráficos a mitad de página. */
+	.print-block {
+		break-inside: avoid;
+		page-break-inside: avoid;
+	}
+
+	table {
+		break-inside: auto;
+	}
+	tr,
+	img,
+	canvas {
+		break-inside: avoid;
+		page-break-inside: avoid;
+	}
+
+	thead {
+		display: table-header-group;
+	}
+
+	a[href]::after {
+		content: '';
+	}
 }

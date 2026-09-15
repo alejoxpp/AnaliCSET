@@ -8,7 +8,7 @@ function Spinner($$renderer, $$props) {
 		lg: "h-10 w-10 border-[3px]"
 	};
 	const toneClasses = {
-		primary: "border-neutral-300 border-t-primary-600",
+		primary: "border-neutral-300 border-t-primary-600 dark:border-neutral-700 dark:border-t-primary-400",
 		white: "border-white/30 border-t-white"
 	};
 	$$renderer.push(`<span${attr_class(`inline-block animate-spin rounded-full ${stringify(sizeClasses[size] ?? sizeClasses.md)} ${stringify(toneClasses[tone] ?? toneClasses.primary)}`)} role="status"${attr("aria-label", label)}></span>`);
@@ -19,7 +19,7 @@ function Button($$renderer, $$props) {
 	let { variant = "primary", type = "button", disabled = false, loading = false, fullWidth = false, children, $$slots, $$events, ...rest } = $$props;
 	const variantClasses = {
 		primary: "bg-primary-600 text-white hover:bg-primary-700 focus-visible:outline-primary-600",
-		secondary: "bg-white text-primary-700 border border-primary-300 hover:bg-primary-50 focus-visible:outline-primary-600",
+		secondary: "bg-white text-primary-700 border border-primary-300 hover:bg-primary-50 focus-visible:outline-primary-600 dark:bg-neutral-900 dark:text-primary-300 dark:border-neutral-700 dark:hover:bg-neutral-800",
 		danger: "bg-danger-500 text-white hover:bg-danger-600 focus-visible:outline-danger-500"
 	};
 	$$renderer.push(`<button${attributes({

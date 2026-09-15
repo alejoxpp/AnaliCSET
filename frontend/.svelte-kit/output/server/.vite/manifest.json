@@ -46,6 +46,14 @@
       "_server.js"
     ]
   },
+  "_ThemeToggle.js": {
+    "file": "chunks/ThemeToggle.js",
+    "name": "ThemeToggle",
+    "imports": [
+      "_server.js",
+      "_theme.js"
+    ]
+  },
   "_actas.js": {
     "file": "chunks/actas.js",
     "name": "actas",
@@ -158,6 +166,14 @@
       "_client.js"
     ]
   },
+  "_theme.js": {
+    "file": "chunks/theme.js",
+    "name": "theme",
+    "imports": [
+      "_shared2.js",
+      "_index-server2.js"
+    ]
+  },
   "_toast.js": {
     "file": "chunks/toast.js",
     "name": "toast",
@@ -230,7 +246,8 @@
       "_server.js",
       "_state.js",
       "_navigation.js",
-      "_auth.js"
+      "_auth.js",
+      "_ThemeToggle.js"
     ]
   },
   "src/routes/(app)/actas/+page.js": {
@@ -298,6 +315,8 @@
     "isEntry": true,
     "imports": [
       "_server.js",
+      "_toast.js",
+      "_theme.js",
       "_Card.js",
       "_Badge.js",
       "_ChartWrapper.js"
@@ -366,7 +385,7 @@
       "_toast.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout.BzANrgFf.css"
+      "_app/immutable/assets/_layout.DDI6IZ4J.css"
     ]
   },
   "src/routes/+page.js": {
@@ -384,7 +403,8 @@
     "src": "src/routes/+page.svelte",
     "isEntry": true,
     "imports": [
-      "_server.js"
+      "_server.js",
+      "_ThemeToggle.js"
     ]
   },
   "src/routes/design-system/+page.svelte": {

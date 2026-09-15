@@ -8,7 +8,7 @@
 	};
 
 	const toneClasses = {
-		primary: 'border-neutral-300 border-t-primary-600',
+		primary: 'border-neutral-300 border-t-primary-600 dark:border-neutral-700 dark:border-t-primary-400',
 		white: 'border-white/30 border-t-white'
 	};
 </script>

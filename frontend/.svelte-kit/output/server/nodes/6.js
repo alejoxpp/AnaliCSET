@@ -6,6 +6,6 @@ export const universal = {
   "load": null
 };
 export const universal_id = "src/routes/(app)/dashboard/+page.js";
-export const imports = ["_app/immutable/nodes/6.CJkZXS3X.js","_app/immutable/chunks/C5MK2tf2.js","_app/immutable/chunks/xihTtKlq.js","_app/immutable/chunks/CbekURwP.js","_app/immutable/chunks/BueeUZnw.js","_app/immutable/chunks/DALNI4I_.js","_app/immutable/chunks/WCQHf1Qe.js","_app/immutable/chunks/zkAeTAfJ.js","_app/immutable/chunks/XMmKRHXw.js","_app/immutable/chunks/BF-BdX4z.js"];
+export const imports = ["_app/immutable/nodes/6.H-0ECKSM.js","_app/immutable/chunks/BLZ_aeE7.js","_app/immutable/chunks/xihTtKlq.js","_app/immutable/chunks/BDH2Bd1o.js","_app/immutable/chunks/BFkVoRKX.js","_app/immutable/chunks/CJgNEAOV.js","_app/immutable/chunks/CEmaO0rR.js","_app/immutable/chunks/B6R7pDbY.js","_app/immutable/chunks/C2_pdvoB.js","_app/immutable/chunks/C2j-iIX6.js","_app/immutable/chunks/BsvKC6u_.js"];
 export const stylesheets = [];
 export const fonts = [];

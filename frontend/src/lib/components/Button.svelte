@@ -14,7 +14,7 @@
 	const variantClasses = {
 		primary: 'bg-primary-600 text-white hover:bg-primary-700 focus-visible:outline-primary-600',
 		secondary:
-			'bg-white text-primary-700 border border-primary-300 hover:bg-primary-50 focus-visible:outline-primary-600',
+			'bg-white text-primary-700 border border-primary-300 hover:bg-primary-50 focus-visible:outline-primary-600 dark:bg-neutral-900 dark:text-primary-300 dark:border-neutral-700 dark:hover:bg-neutral-800',
 		danger: 'bg-danger-500 text-white hover:bg-danger-600 focus-visible:outline-danger-500'
 	};
 </script>

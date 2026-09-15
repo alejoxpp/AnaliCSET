@@ -85,7 +85,40 @@ var dashboard_default = {
 			"titulo": "Correlación entre bajo rendimiento y cambios de instructor",
 			"fecha": "2026-08-29"
 		}
-	]
+	],
+	insight: {
+		"titulo": "Se detectó un incremento del 18% en casos de inasistencia reiterada",
+		"descripcion": "Concentrado en fichas de jornada nocturna durante el último trimestre, frente al mismo periodo del año anterior.",
+		"delta": "18%",
+		"trend": "up",
+		"patronId": "p-104"
+	},
+	comparativa: {
+		"periodoActual": "Jul – Sep 2026",
+		"periodoAnterior": "Abr – Jun 2026",
+		"metricas": [
+			{
+				"label": "Actas procesadas",
+				"actual": 55,
+				"anterior": 43
+			},
+			{
+				"label": "Casos registrados",
+				"actual": 117,
+				"anterior": 103
+			},
+			{
+				"label": "Patrones detectados",
+				"actual": 9,
+				"anterior": 6
+			},
+			{
+				"label": "Casos reincidentes",
+				"actual": 14,
+				"anterior": 17
+			}
+		]
+	}
 };
 //#endregion
 //#region src/lib/api/dashboard.js

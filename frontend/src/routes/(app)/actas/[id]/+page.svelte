@@ -3,6 +3,9 @@
 	import Card from '$lib/components/Card.svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import Button from '$lib/components/Button.svelte';
+	import EmptyState from '$lib/components/EmptyState.svelte';
+	import ProgressRing from '$lib/components/ProgressRing.svelte';
+	import PrintButton from '$lib/components/PrintButton.svelte';
 	import { toasts } from '$lib/stores/toast.js';
 
 	let { data } = $props();
@@ -62,7 +65,7 @@
 	<div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
 		<a
 			href={returnUrl}
-			class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-primary-700 hover:text-primary-800 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-md p-1"
+			class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-primary-700 hover:text-primary-800 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 rounded-md p-1 dark:text-primary-400 dark:hover:text-primary-300 print:hidden"
 		>
 			<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
@@ -71,10 +74,21 @@
 		</a>
 
 		<!-- Breadcrumb -->
-		<div class="flex items-center gap-2 text-xs text-neutral-500">
-			<a href="/actas" class="hover:text-primary-700 hover:underline">Actas</a>
-			<span>/</span>
-			<span class="text-neutral-900 font-semibold">{acta ? acta.consecutivo : 'Detalle'}</span>
+		<div class="flex items-center gap-3">
+			<div class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
+				<a href="/actas" class="hover:text-primary-700 hover:underline dark:hover:text-primary-400">
+					Actas
+				</a>
+				<span>/</span>
+				<span class="text-neutral-900 font-semibold dark:text-neutral-100">
+					{acta ? acta.consecutivo : 'Detalle'}
+				</span>
+			</div>
+			{#if acta}
+				<div class="print:hidden">
+					<PrintButton />
+				</div>
+			{/if}
 		</div>
 	</div>
 
@@ -134,6 +148,35 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- ═══ Sección: Resumen generado por IA ═══ -->
+		{#if acta.resumen_ia}
+			<div
+				class="print-block rounded-xl border border-accent-200 bg-accent-50/50 p-5 dark:border-accent-700/40 dark:bg-accent-500/10"
+			>
+				<div class="flex items-start gap-3">
+					<div
+						class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent-500/20 text-accent-600 dark:text-accent-400"
+					>
+						<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456Z" />
+						</svg>
+					</div>
+					<div class="min-w-0">
+						<h3 class="font-heading text-sm font-bold text-neutral-900 dark:text-neutral-50">
+							Resumen generado por IA
+						</h3>
+						<p class="mt-2 max-w-3xl text-sm leading-relaxed text-neutral-700 dark:text-neutral-200">
+							{acta.resumen_ia}
+						</p>
+						<p class="mt-3 text-[11px] text-neutral-500 dark:text-neutral-400">
+							Resumen automático sobre el acta y sus anexos. Verifique contra el documento oficial
+							antes de usarlo como soporte de una decisión.
+						</p>
+					</div>
+				</div>
+			</div>
+		{/if}
 
 		<!-- ═══ Sección: Archivos Asociados (PDF y Excel) ═══ -->
 		<Card title="Documentos y Anexos del Acta">
@@ -206,9 +249,17 @@
 		<!-- ═══ Sección: Casos Evaluados en el Acta (GET /api/casos?id_acta=) ═══ -->
 		<Card title="Casos Evaluados en la Sesión ({casos.length})">
 			{#if casos.length === 0}
-				<div class="py-8 text-center text-xs text-neutral-500">
-					No hay registros de casos tipificados vinculados a esta acta.
-				</div>
+				<EmptyState
+					size="sm"
+					title="Esta acta no tiene casos tipificados"
+					description="El acta se cargó, pero su anexo de casos aún no se ha procesado. Cargue el Excel de seguimiento para ver los casos aquí."
+				>
+					{#snippet icon()}
+						<svg class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1" aria-hidden="true">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+						</svg>
+					{/snippet}
+				</EmptyState>
 			{:else}
 				<!-- Vista Tabla para Pantallas Medianas y Grandes -->
 				<div class="hidden sm:block overflow-x-auto rounded-lg border border-neutral-200">
@@ -295,31 +346,45 @@
 			<Card title="Patrones Detectados por IA en esta Acta">
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 					{#each patrones as patron (patron.id)}
-						<div class="rounded-xl border border-accent-200/90 bg-accent-50/20 p-4 space-y-2">
-							<div class="flex items-start justify-between gap-2">
+						<div
+							class="print-block flex items-start gap-4 rounded-xl border border-accent-200/90 bg-accent-50/20 p-4 dark:border-accent-700/40 dark:bg-accent-500/10"
+						>
+							<div class="min-w-0 flex-1 space-y-2">
 								<div class="flex items-center gap-2">
 									<!-- Sparkle Icon -->
-									<div class="flex h-6 w-6 items-center justify-center rounded-md bg-accent-500/20 text-accent-600">
+									<div
+										class="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent-500/20 text-accent-600 dark:text-accent-400"
+									>
 										<svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 											<path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
 										</svg>
 									</div>
-									<h4 class="font-heading text-xs font-bold text-neutral-900">
+									<h4 class="font-heading text-xs font-bold text-neutral-900 dark:text-neutral-50">
 										{patron.nombre}
 									</h4>
 								</div>
-								<Badge variant="accent">{patron.porcentaje}% correlación</Badge>
+
+								<p class="text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">
+									{patron.descripcion}
+								</p>
+
+								{#if patron.nivel_riesgo}
+									<div class="pt-1 text-[11px] text-neutral-500 dark:text-neutral-400">
+										Nivel de riesgo estimado:
+										<strong class="text-neutral-800 dark:text-neutral-200">
+											{patron.nivel_riesgo}
+										</strong>
+									</div>
+								{/if}
 							</div>
 
-							<p class="text-xs text-neutral-600 leading-relaxed">
-								{patron.descripcion}
-							</p>
-
-							{#if patron.nivel_riesgo}
-								<div class="text-[11px] text-neutral-500 pt-1">
-									Nivel de riesgo estimado: <strong class="text-neutral-800">{patron.nivel_riesgo}</strong>
-								</div>
-							{/if}
+							<ProgressRing
+								value={patron.porcentaje}
+								size="sm"
+								tone="accent"
+								label="correlación"
+								ariaLabel="{patron.porcentaje}% de correlación"
+							/>
 						</div>
 					{/each}
 				</div>

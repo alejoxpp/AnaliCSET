@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,6 +13,20 @@
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
 		/>
+		<script>
+			// Aplica el tema antes del primer pintado para evitar el parpadeo
+			// blanco al recargar en modo oscuro. Debe coincidir con la lógica
+			// de src/lib/stores/theme.js.
+			(function () {
+				try {
+					var stored = localStorage.getItem('analicset_theme');
+					var dark = stored
+						? stored === 'dark'
+						: window.matchMedia('(prefers-color-scheme: dark)').matches;
+					if (dark) document.documentElement.classList.add('dark');
+				} catch (e) {}
+			})();
+		</script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

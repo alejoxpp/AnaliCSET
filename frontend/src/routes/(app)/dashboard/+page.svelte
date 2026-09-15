@@ -3,12 +3,26 @@
 	import KpiCard from '$lib/components/KpiCard.svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import ChartWrapper from '$lib/components/ChartWrapper.svelte';
+	import InsightCard from '$lib/components/InsightCard.svelte';
+	import PrintButton from '$lib/components/PrintButton.svelte';
+	import { theme } from '$lib/stores/theme.js';
+	import { chartTheme } from '$lib/chartTheme.js';
 
 	let { data } = $props();
 	const kpis = $derived(data.summary.kpis);
 	const evolucion = $derived(data.summary.evolucion);
 	const ultimasActas = $derived(data.summary.ultimasActas);
 	const ultimosPatrones = $derived(data.summary.ultimosPatrones);
+	const insight = $derived(data.summary.insight);
+	const comparativa = $derived(data.summary.comparativa);
+
+	const ct = $derived(chartTheme($theme === 'dark'));
+
+	/** Variación porcentual del periodo actual frente al anterior. */
+	function variacion(actual, anterior) {
+		if (!anterior) return 0;
+		return Math.round(((actual - anterior) / anterior) * 100);
+	}
 
 	const dateFormatter = new Intl.DateTimeFormat('es-CO', {
 		day: '2-digit',
@@ -49,7 +63,7 @@
 		]
 	});
 
-	const chartOptions = {
+	const chartOptions = $derived({
 		responsive: true,
 		maintainAspectRatio: false,
 		interaction: {
@@ -66,11 +80,12 @@
 					pointStyle: 'circle',
 					boxWidth: 6,
 					padding: 16,
-					font: { size: 12 }
+					font: { size: 12 },
+					color: ct.legend
 				}
 			},
 			tooltip: {
-				backgroundColor: 'rgba(20, 23, 27, 0.9)',
+				backgroundColor: ct.tooltipBg,
 				padding: 10,
 				cornerRadius: 8,
 				titleFont: { weight: '600' },
@@ -80,15 +95,15 @@
 		scales: {
 			y: {
 				beginAtZero: true,
-				grid: { color: 'rgba(0,0,0,0.04)' },
-				ticks: { font: { size: 11 } }
+				grid: { color: ct.grid },
+				ticks: { font: { size: 11 }, color: ct.tick }
 			},
 			x: {
 				grid: { display: false },
-				ticks: { font: { size: 11 } }
+				ticks: { font: { size: 11 }, color: ct.tick }
 			}
 		}
-	};
+	});
 </script>
 
 <svelte:head>
@@ -96,6 +111,32 @@
 </svelte:head>
 
 <div class="space-y-6">
+	<!-- ═══ Encabezado con acción de reporte ═══ -->
+	<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+		<div>
+			<h2
+				class="font-heading text-xl font-bold tracking-tight text-neutral-900 sm:text-2xl dark:text-neutral-50"
+			>
+				Resumen del Comité
+			</h2>
+			<p class="text-xs text-neutral-600 sm:text-sm dark:text-neutral-400">
+				Estado general del histórico CSET y hallazgos recientes del análisis.
+			</p>
+		</div>
+		<div class="print:hidden">
+			<PrintButton />
+		</div>
+	</div>
+
+	<!-- ═══ Hallazgo destacado de IA ═══ -->
+	<InsightCard
+		titulo={insight.titulo}
+		descripcion={insight.descripcion}
+		delta={insight.delta}
+		trend={insight.trend}
+		href="/patrones/{insight.patronId}"
+	/>
+
 	<!-- ═══ KPI Cards ═══ -->
 	<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 		<KpiCard label="Actas cargadas" class="stagger-1">
@@ -144,6 +185,65 @@
 		</Card>
 	</div>
 
+	<!-- ═══ Comparador: periodo actual vs. anterior ═══ -->
+	<div class="animate-fade-in-up" style="animation-delay: 340ms;">
+		<Card title="Este periodo frente al anterior">
+			<div class="mb-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
+				<span class="flex items-center gap-1.5 text-neutral-700 dark:text-neutral-200">
+					<span class="h-2 w-2 rounded-full bg-primary-600"></span>
+					{comparativa.periodoActual}
+				</span>
+				<span class="flex items-center gap-1.5 text-neutral-500 dark:text-neutral-400">
+					<span class="h-2 w-2 rounded-full bg-neutral-300 dark:bg-neutral-600"></span>
+					{comparativa.periodoAnterior}
+				</span>
+			</div>
+
+			<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+				{#each comparativa.metricas as metrica (metrica.label)}
+					{@const delta = variacion(metrica.actual, metrica.anterior)}
+					{@const maximo = Math.max(metrica.actual, metrica.anterior) || 1}
+					<div>
+						<p class="text-xs text-neutral-500 dark:text-neutral-400">{metrica.label}</p>
+						<div class="mt-1 flex items-baseline gap-2">
+							<span class="font-heading text-2xl font-bold text-neutral-900 dark:text-neutral-50">
+								{metrica.actual}
+							</span>
+							<span
+								class="text-xs font-semibold {delta > 0
+									? 'text-danger-600 dark:text-danger-500'
+									: delta < 0
+										? 'text-success-600 dark:text-success-500'
+										: 'text-neutral-400'}"
+							>
+								{delta > 0 ? '+' : ''}{delta}%
+							</span>
+						</div>
+
+						<!-- Barras comparadas: actual sobre anterior -->
+						<div class="mt-2 space-y-1">
+							<div class="h-1.5 w-full overflow-hidden rounded-full bg-neutral-100 dark:bg-neutral-800">
+								<div
+									class="h-full rounded-full bg-primary-600 transition-[width] duration-700 ease-out"
+									style="width: {(metrica.actual / maximo) * 100}%"
+								></div>
+							</div>
+							<div class="h-1.5 w-full overflow-hidden rounded-full bg-neutral-100 dark:bg-neutral-800">
+								<div
+									class="h-full rounded-full bg-neutral-300 transition-[width] duration-700 ease-out dark:bg-neutral-600"
+									style="width: {(metrica.anterior / maximo) * 100}%"
+								></div>
+							</div>
+						</div>
+						<p class="mt-1 text-[11px] text-neutral-400 dark:text-neutral-500">
+							antes: {metrica.anterior}
+						</p>
+					</div>
+				{/each}
+			</div>
+		</Card>
+	</div>
+
 	<!-- ═══ Secciones inferiores: Últimas actas + Patrones IA ═══ -->
 	<div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
 		<!-- Últimas actas cargadas -->
@@ -152,26 +252,28 @@
 				<div class="overflow-x-auto">
 					<table class="w-full text-left text-sm">
 						<thead>
-							<tr class="border-b border-neutral-200 text-xs font-medium tracking-wide text-neutral-500 uppercase">
+							<tr class="border-b border-neutral-200 text-xs font-medium tracking-wide text-neutral-500 uppercase dark:border-neutral-800 dark:text-neutral-400">
 								<th class="pb-2 pr-4 font-medium">N.° Acta</th>
 								<th class="pb-2 pr-4 font-medium">Ficha</th>
 								<th class="pb-2 pr-4 font-medium">Fecha</th>
 								<th class="pb-2 font-medium text-right">Casos</th>
 							</tr>
 						</thead>
-						<tbody class="divide-y divide-neutral-100">
+						<tbody class="divide-y divide-neutral-100 dark:divide-neutral-800">
 							{#each ultimasActas as acta (acta.id)}
-								<tr class="transition-colors hover:bg-neutral-50">
+								<tr class="transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800/50">
 									<td class="py-2.5 pr-4">
 										<a
 											href="/actas/{acta.id}"
-											class="font-medium text-primary-700 hover:underline"
+											class="font-medium text-primary-700 hover:underline dark:text-primary-400"
 										>
 											{acta.numero}
 										</a>
 									</td>
-									<td class="py-2.5 pr-4 text-neutral-600">{acta.ficha}</td>
-									<td class="py-2.5 pr-4 text-neutral-500">{formatDate(acta.fecha)}</td>
+									<td class="py-2.5 pr-4 text-neutral-600 dark:text-neutral-300">{acta.ficha}</td>
+									<td class="py-2.5 pr-4 text-neutral-500 dark:text-neutral-400">
+										{formatDate(acta.fecha)}
+									</td>
 									<td class="py-2.5 text-right">
 										<Badge variant="primary">{acta.casos}</Badge>
 									</td>
@@ -186,24 +288,28 @@
 		<!-- Últimos patrones detectados por IA -->
 		<div class="animate-fade-in-up" style="animation-delay: 480ms;">
 			<Card title="Últimos patrones detectados por IA">
-				<ul class="divide-y divide-neutral-100">
+				<ul class="divide-y divide-neutral-100 dark:divide-neutral-800">
 					{#each ultimosPatrones as patron (patron.id)}
-						<li class="flex items-start justify-between gap-4 py-3 transition-colors hover:bg-neutral-50 -mx-5 px-5 first:pt-0 last:pb-0">
+						<li class="flex items-start justify-between gap-4 py-3 transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800/50 -mx-5 px-5 first:pt-0 last:pb-0">
 							<div class="flex items-start gap-3">
 								<!-- Ícono sparkle (IA) -->
 								<div class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-accent-400/15">
-									<svg class="h-3.5 w-3.5 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+									<svg class="h-3.5 w-3.5 text-accent-600 dark:text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
 										<path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" />
 									</svg>
 								</div>
 								<div>
-									<p class="text-sm font-medium text-neutral-900">{patron.titulo}</p>
-									<p class="text-xs text-neutral-500">{formatDate(patron.fecha)}</p>
+									<p class="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+										{patron.titulo}
+									</p>
+									<p class="text-xs text-neutral-500 dark:text-neutral-400">
+										{formatDate(patron.fecha)}
+									</p>
 								</div>
 							</div>
 							<a
 								href="/patrones/{patron.id}"
-								class="shrink-0 text-sm font-medium text-primary-700 hover:underline"
+								class="shrink-0 text-sm font-medium text-primary-700 hover:underline dark:text-primary-400"
 							>
 								Ver detalle
 							</a>

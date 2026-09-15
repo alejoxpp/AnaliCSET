@@ -56,6 +56,7 @@
 <!-- Barra lateral (Drawer en móvil/tablet, estática en desktop) -->
 <aside
 	class="fixed inset-y-0 left-0 z-50 flex w-64 flex-col bg-primary-900 text-white shadow-xl transition-transform duration-300 ease-in-out print:hidden
+		dark:bg-neutral-900 dark:border-r dark:border-neutral-800
 		lg:static lg:z-auto lg:w-60 lg:shrink-0 lg:shadow-none lg:translate-x-0
 		{open ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}"
 	aria-label="Navegación principal"
@@ -92,7 +93,7 @@
 	</div>
 
 	<!-- Separador -->
-	<div class="mx-4 border-t border-primary-800/80"></div>
+	<div class="mx-4 border-t border-primary-800/80 dark:border-neutral-800"></div>
 
 	<!-- Navegación -->
 	<nav class="flex-1 space-y-1 px-3 pt-4 overflow-y-auto">
@@ -105,8 +106,8 @@
 				class="group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-150
 					focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-300
 					{active
-					? 'bg-primary-800/90 text-white shadow-sm ring-1 ring-primary-700/60'
-					: 'text-primary-200 hover:bg-primary-800/50 hover:text-white'}"
+					? 'bg-primary-800/90 text-white shadow-sm ring-1 ring-primary-700/60 dark:bg-neutral-800 dark:ring-neutral-700'
+					: 'text-primary-200 hover:bg-primary-800/50 hover:text-white dark:text-neutral-400 dark:hover:bg-neutral-800/60 dark:hover:text-white'}"
 			>
 				<!-- Indicador activo con gradiente de la onda -->
 				{#if active}
@@ -144,7 +145,7 @@
 	</nav>
 
 	<!-- Footer con versión -->
-	<div class="border-t border-primary-700/50 px-5 py-3">
-		<p class="text-[10px] text-primary-400">AnaliCSET v0.1.0 · SENA CSET</p>
+	<div class="border-t border-primary-700/50 px-5 py-3 dark:border-neutral-800">
+		<p class="text-[10px] text-primary-400 dark:text-neutral-500">AnaliCSET v0.1.0 · SENA CSET</p>
 	</div>
 </aside>

@@ -9,7 +9,8 @@
 			"estado": "Procesada",
 			"totalCasos": 5,
 			"archivo_pdf": "Acta_CSET_2026_256.pdf",
-			"archivo_excel": "Anexo_Seguimiento_2758421.xlsx"
+			"archivo_excel": "Anexo_Seguimiento_2758421.xlsx",
+			"resumen_ia": "La sesión revisó cinco casos de la ficha 2758421, cuatro de ellos por inasistencia reiterada en la jornada nocturna. El comité acordó plan de mejoramiento para tres aprendices y remitió uno a Bienestar. Es la tercera acta consecutiva de esta ficha con casos de inasistencia, lo que sostiene el patrón detectado en el trimestre."
 		},
 		{
 			"id": "a-255",
@@ -20,7 +21,8 @@
 			"estado": "Procesada",
 			"totalCasos": 3,
 			"archivo_pdf": "Acta_CSET_2026_255.pdf",
-			"archivo_excel": "Anexo_Seguimiento_2713890.xlsx"
+			"archivo_excel": "Anexo_Seguimiento_2713890.xlsx",
+			"resumen_ia": "Tres casos revisados, todos por bajo rendimiento académico en competencias técnicas. El comité concedió plazo de nivelación hasta el cierre del trimestre. No se registran antecedentes previos para estos aprendices en el histórico del CSET."
 		},
 		{
 			"id": "a-254",
@@ -31,7 +33,8 @@
 			"estado": "En revisión",
 			"totalCasos": 7,
 			"archivo_pdf": "Acta_CSET_2026_254.pdf",
-			"archivo_excel": null
+			"archivo_excel": null,
+			"resumen_ia": "Siete casos, el volumen más alto del periodo para una sola sesión. Predominan deserción (tres casos) y bajo rendimiento (tres casos). El acta aún no tiene anexo en Excel cargado, por lo que la tipificación de dos casos quedó incompleta y puede cambiar al completarse."
 		},
 		{
 			"id": "a-253",
@@ -42,7 +45,8 @@
 			"estado": "Procesada",
 			"totalCasos": 2,
 			"archivo_pdf": "Acta_CSET_2026_253.pdf",
-			"archivo_excel": "Anexo_Casos_2745009.xlsx"
+			"archivo_excel": "Anexo_Casos_2745009.xlsx",
+			"resumen_ia": "Sesión corta con dos casos: uno por conducta y uno por plagio en evidencia de aprendizaje. Ambos cerraron con compromiso firmado y sin sanción académica. La ficha no presenta reincidencias en lo corrido del año."
 		},
 		{
 			"id": "a-252",
@@ -53,7 +57,8 @@
 			"estado": "Procesada",
 			"totalCasos": 4,
 			"archivo_pdf": "Acta_CSET_2026_252.pdf",
-			"archivo_excel": "Anexo_2701334.xlsx"
+			"archivo_excel": "Anexo_2701334.xlsx",
+			"resumen_ia": "Cuatro casos, tres de ellos concentrados en aprendices que cambiaron de instructor durante el trimestre. El comité solicitó acompañamiento pedagógico. Este cruce entre cambio de instructor y bajo rendimiento aparece también en otras dos fichas del mismo periodo."
 		},
 		{
 			"id": "a-251",
@@ -75,7 +80,8 @@
 			"estado": "Procesada",
 			"totalCasos": 3,
 			"archivo_pdf": "Acta_CSET_2026_250.pdf",
-			"archivo_excel": "Seguimiento_2772015.xlsx"
+			"archivo_excel": "Seguimiento_2772015.xlsx",
+			"resumen_ia": "Tres casos por inasistencia, todos con justificación médica aportada posteriormente. El comité levantó las medidas iniciales. Se sugiere revisar el procedimiento de radicación de excusas, porque el mismo desenlace se repitió en cuatro actas del semestre."
 		},
 		{
 			"id": "a-249",
@@ -86,7 +92,8 @@
 			"estado": "Procesada",
 			"totalCasos": 5,
 			"archivo_pdf": "Acta_CSET_2026_249.pdf",
-			"archivo_excel": "Anexo_2734567.xlsx"
+			"archivo_excel": "Anexo_2734567.xlsx",
+			"resumen_ia": "Cinco casos mixtos: dos por deserción, dos por bajo rendimiento y uno por conducta. Los dos casos de deserción corresponden a aprendices que ya habían sido citados por inasistencia en julio, secuencia que el análisis viene señalando como antecedente frecuente de retiro."
 		}
 	]
 }
