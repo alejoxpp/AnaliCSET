@@ -9,23 +9,9 @@
       "_internal2.js"
     ]
   },
-  "_Badge.js": {
-    "file": "chunks/Badge.js",
-    "name": "Badge",
-    "imports": [
-      "_server.js"
-    ]
-  },
   "_Button.js": {
     "file": "chunks/Button.js",
     "name": "Button",
-    "imports": [
-      "_server.js"
-    ]
-  },
-  "_Card.js": {
-    "file": "chunks/Card.js",
-    "name": "Card",
     "imports": [
       "_server.js"
     ]
@@ -36,6 +22,36 @@
     "imports": [
       "_index-server.js",
       "_shared2.js",
+      "_server.js",
+      "_theme.js"
+    ]
+  },
+  "_EmptyState.js": {
+    "file": "chunks/EmptyState.js",
+    "name": "EmptyState",
+    "imports": [
+      "_server.js"
+    ]
+  },
+  "_InsightCard.js": {
+    "file": "chunks/InsightCard.js",
+    "name": "InsightCard",
+    "imports": [
+      "_server.js"
+    ]
+  },
+  "_PrintButton.js": {
+    "file": "chunks/PrintButton.js",
+    "name": "PrintButton",
+    "imports": [
+      "_server.js",
+      "_toast.js"
+    ]
+  },
+  "_ProgressRing.js": {
+    "file": "chunks/ProgressRing.js",
+    "name": "ProgressRing",
+    "imports": [
       "_server.js"
     ]
   },
@@ -140,6 +156,13 @@
     "name": "navigation",
     "imports": [
       "_client.js"
+    ]
+  },
+  "_patrones.js": {
+    "file": "chunks/patrones.js",
+    "name": "patrones",
+    "imports": [
+      "_client2.js"
     ]
   },
   "_server.js": {
@@ -269,9 +292,9 @@
       "_toast.js",
       "_state.js",
       "_navigation.js",
-      "_Card.js",
-      "_Badge.js",
       "_Button.js",
+      "_PrintButton.js",
+      "_EmptyState.js",
       "_Skeleton.js"
     ]
   },
@@ -282,7 +305,8 @@
     "isEntry": true,
     "imports": [
       "_actas.js",
-      "_client2.js"
+      "_client2.js",
+      "_patrones.js"
     ]
   },
   "src/routes/(app)/actas/[id]/+page.svelte": {
@@ -294,9 +318,10 @@
       "_server.js",
       "_toast.js",
       "_state.js",
-      "_Card.js",
-      "_Badge.js",
-      "_Button.js"
+      "_Button.js",
+      "_PrintButton.js",
+      "_EmptyState.js",
+      "_ProgressRing.js"
     ]
   },
   "src/routes/(app)/dashboard/+page.js": {
@@ -314,12 +339,15 @@
     "src": "src/routes/(app)/dashboard/+page.svelte",
     "isEntry": true,
     "imports": [
+      "_index-server.js",
+      "_shared2.js",
       "_server.js",
-      "_toast.js",
       "_theme.js",
-      "_Card.js",
-      "_Badge.js",
-      "_ChartWrapper.js"
+      "_Button.js",
+      "_PrintButton.js",
+      "_ProgressRing.js",
+      "_ChartWrapper.js",
+      "_InsightCard.js"
     ]
   },
   "src/routes/(app)/estadisticas/+page.js": {
@@ -339,12 +367,22 @@
     "imports": [
       "_server.js",
       "_toast.js",
-      "_Card.js",
-      "_Badge.js",
+      "_theme.js",
       "_Button.js",
+      "_PrintButton.js",
       "_Skeleton.js",
       "_ChartWrapper.js",
       "_estadisticas.js"
+    ]
+  },
+  "src/routes/(app)/patrones/[id]/+page.js": {
+    "file": "entries/pages/(app)/patrones/_id_/_page.js",
+    "name": "entries/pages/(app)/patrones/_id_/_page",
+    "src": "src/routes/(app)/patrones/[id]/+page.js",
+    "isEntry": true,
+    "imports": [
+      "_actas.js",
+      "_patrones.js"
     ]
   },
   "src/routes/(app)/patrones/[id]/+page.svelte": {
@@ -354,8 +392,10 @@
     "isEntry": true,
     "imports": [
       "_server.js",
-      "_state.js",
-      "_Card.js"
+      "_Button.js",
+      "_PrintButton.js",
+      "_EmptyState.js",
+      "_ProgressRing.js"
     ]
   },
   "src/routes/(app)/reportes/+page.svelte": {
@@ -365,8 +405,8 @@
     "isEntry": true,
     "imports": [
       "_server.js",
-      "_Card.js",
-      "_Badge.js"
+      "_Button.js",
+      "_EmptyState.js"
     ]
   },
   "src/routes/+layout.js": {
@@ -385,7 +425,7 @@
       "_toast.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout.DDI6IZ4J.css"
+      "_app/immutable/assets/_layout.Ct3MIKnQ.css"
     ]
   },
   "src/routes/+page.js": {
@@ -415,10 +455,13 @@
     "imports": [
       "_server.js",
       "_toast.js",
-      "_Card.js",
-      "_Badge.js",
+      "_ThemeToggle.js",
       "_Button.js",
-      "_Skeleton.js"
+      "_PrintButton.js",
+      "_EmptyState.js",
+      "_Skeleton.js",
+      "_ProgressRing.js",
+      "_InsightCard.js"
     ]
   },
   "src/routes/login/+page.js": {
@@ -439,7 +482,8 @@
       "_server.js",
       "_toast.js",
       "_navigation.js",
-      "_auth.js"
+      "_auth.js",
+      "_ThemeToggle.js"
     ]
   },
   "virtual:__sveltekit/env": {

@@ -1,9 +1,12 @@
+import "../../../../chunks/index-server.js";
+import "../../../../chunks/shared2.js";
 import { T as escape_html, a as derived, d as stringify, f as unsubscribe_stores, n as attr_style, o as ensure_array_like, s as head, t as attr_class, u as store_get, w as attr } from "../../../../chunks/server.js";
-import "../../../../chunks/toast.js";
 import { t as theme } from "../../../../chunks/theme.js";
-import { t as Card } from "../../../../chunks/Card.js";
-import { t as Badge } from "../../../../chunks/Badge.js";
-import { t as ChartWrapper } from "../../../../chunks/ChartWrapper.js";
+import { r as Card, t as Button } from "../../../../chunks/Button.js";
+import { n as Badge, t as PrintButton } from "../../../../chunks/PrintButton.js";
+import { t as ProgressRing } from "../../../../chunks/ProgressRing.js";
+import { n as chartTheme, t as ChartWrapper } from "../../../../chunks/ChartWrapper.js";
+import { t as InsightCard } from "../../../../chunks/InsightCard.js";
 //#region src/lib/components/KpiCard.svelte
 function KpiCard($$renderer, $$props) {
 	let { icon, label, value, accent = false, class: className = "" } = $$props;
@@ -14,53 +17,88 @@ function KpiCard($$renderer, $$props) {
 	$$renderer.push(`<!----></p></div>`);
 }
 //#endregion
-//#region src/lib/components/InsightCard.svelte
-function InsightCard($$renderer, $$props) {
-	/**
-	* Hallazgo destacado del análisis de IA. Usa el verde de acento —
-	* reservado en este sistema de diseño para señales de IA/patrones.
-	*/
-	let { titulo, descripcion = "", delta = "", trend = "up", href = "", hrefLabel = "Ver detalle" } = $$props;
-	const trendUp = derived(() => trend === "up");
-	$$renderer.push(`<div class="print-block relative overflow-hidden rounded-xl border border-accent-200 bg-accent-50/60 p-4 sm:p-5 dark:border-accent-700/40 dark:bg-accent-500/10"><div class="flex items-start gap-3"><div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-accent-500/20 text-accent-600 dark:text-accent-400"><svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456Z"></path></svg></div> <div class="min-w-0 flex-1"><div class="flex flex-wrap items-center gap-2"><span class="text-[10px] font-bold tracking-wider text-accent-700 uppercase dark:text-accent-400">Hallazgo de IA</span> `);
-	if (delta) {
-		$$renderer.push(`<!--[0--><span${attr_class(`inline-flex items-center gap-0.5 rounded-full px-2 py-0.5 text-[11px] font-bold ${trendUp() ? "bg-danger-500/10 text-danger-600 dark:text-danger-500" : "bg-success-500/10 text-success-600 dark:text-success-500"}`)}><svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">`);
-		if (trendUp()) $$renderer.push(`<!--[0--><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306A11.95 11.95 0 0 1 21.75 6m0 0h-4.5m4.5 0v4.5"></path>`);
-		else $$renderer.push(`<!--[-1--><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.51-5.511-3.181"></path>`);
-		$$renderer.push(`<!--]--></svg> ${escape_html(delta)}</span>`);
-	} else $$renderer.push("<!--[-1-->");
-	$$renderer.push(`<!--]--></div> <p class="mt-1 font-heading text-sm font-bold text-neutral-900 sm:text-base dark:text-neutral-50">${escape_html(titulo)}</p> `);
-	if (descripcion) $$renderer.push(`<!--[0--><p class="mt-1 text-xs leading-relaxed text-neutral-600 dark:text-neutral-300">${escape_html(descripcion)}</p>`);
-	else $$renderer.push("<!--[-1-->");
-	$$renderer.push(`<!--]--> `);
-	if (href) $$renderer.push(`<!--[0--><a${attr("href", href)} class="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-accent-700 hover:underline dark:text-accent-400 print:hidden">${escape_html(hrefLabel)} <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path></svg></a>`);
-	else $$renderer.push("<!--[-1-->");
-	$$renderer.push(`<!--]--></div></div></div>`);
-}
-//#endregion
-//#region src/lib/components/PrintButton.svelte
-function PrintButton($$renderer, $$props) {
+//#region src/lib/components/TourGuide.svelte
+function TourGuide($$renderer, $$props) {
 	$$renderer.component(($$renderer) => {
-		let { label = "Generar reporte", title = "Imprimir o guardar como PDF" } = $$props;
-		$$renderer.push(`<button type="button" class="inline-flex cursor-pointer items-center gap-1.5 rounded-lg bg-primary-600 px-3 py-2 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-primary-700 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:outline-none dark:focus-visible:ring-offset-neutral-950"${attr("title", title)}><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m0 0a48.159 48.159 0 0 1 10.5 0m-10.5 0V3.375c0-.621.504-1.125 1.125-1.125h9.75c.621 0 1.125.504 1.125 1.125v3.659M9.75 21h4.5"></path></svg> ${escape_html(label)}</button>`);
+		const STORAGE_KEY = "analicset_tour_completed";
+		let abierto = false;
+		let pasoActual = 0;
+		const pasos = [
+			{
+				titulo: "Bienvenido al Panel de AnaliCSET",
+				etiqueta: "Paso 1 de 3 · Visión General",
+				descripcion: "Aquí encuentras el resumen consolidado del Comité de Evaluación y Seguimiento: estadísticas clave, histórico de casos y las alertas prioritarias sugeridas por el análisis de IA.",
+				destaque: "Revisa la tarjeta de insight en la parte superior para detectar incrementos inusuales.",
+				icono: "ia"
+			},
+			{
+				titulo: "Consulta y Trazabilidad de Actas",
+				etiqueta: "Paso 2 de 3 · Gestión Documental",
+				descripcion: "Accede a todas las sesiones del comité, filtra por número de acta, ficha o fecha, y consulta los casos de aprendices asociados junto a sus anexos oficiales en PDF y Excel.",
+				destaque: "Haz clic en cualquier acta del listado para ver sus casos y patrones asociados.",
+				icono: "actas"
+			},
+			{
+				titulo: "Reportes y Modo Oscuro",
+				etiqueta: "Paso 3 de 3 · Herramientas",
+				descripcion: "Exporta resúmenes oficiales con el botón «Generar reporte» (optimizado para impresión institucional) y adapta la interfaz a tu preferencia con el selector de modo oscuro en el encabezado.",
+				destaque: "El formato de impresión ahorra tinta y mantiene los gráficos visibles de forma limpia.",
+				icono: "print"
+			}
+		];
+		function cerrarTour() {
+			abierto = false;
+			try {
+				localStorage.setItem(STORAGE_KEY, "true");
+			} catch {}
+		}
+		function siguiente() {
+			if (pasoActual < pasos.length - 1) pasoActual += 1;
+			else cerrarTour();
+		}
+		function anterior() {
+			if (pasoActual > 0) pasoActual -= 1;
+		}
+		if (abierto) {
+			$$renderer.push(`<!--[0--><div class="fixed inset-0 z-50 flex items-center justify-center bg-neutral-900/60 p-4 backdrop-blur-xs" role="dialog" aria-modal="true" aria-labelledby="tour-titulo"><div class="relative w-full max-w-lg overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 shadow-2xl dark:border-neutral-800 dark:bg-neutral-900 sm:p-7"><button type="button" class="absolute top-4 right-4 rounded-lg p-1.5 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 cursor-pointer dark:text-neutral-500 dark:hover:bg-neutral-800 dark:hover:text-neutral-300" aria-label="Cerrar guía interactiva"><svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg></button> <!---->`);
+			$$renderer.push(`<div><div class="flex items-center gap-3"><div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary-600 ring-1 ring-primary-200/70 dark:bg-primary-500/15 dark:text-primary-300 dark:ring-primary-500/30">`);
+			if (pasos[pasoActual].icono === "ia") $$renderer.push(`<!--[0--><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"></path></svg>`);
+			else if (pasos[pasoActual].icono === "actas") $$renderer.push(`<!--[1--><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"></path></svg>`);
+			else $$renderer.push(`<!--[-1--><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m0 0a48.159 48.159 0 0 1 10.5 0m-10.5 0V3.375c0-.621.504-1.125 1.125-1.125h9.75c.621 0 1.125.504 1.125 1.125v3.659M9.75 21h4.5"></path></svg>`);
+			$$renderer.push(`<!--]--></div> <div><span class="text-[11px] font-bold tracking-wider text-primary-700 uppercase dark:text-primary-400">${escape_html(pasos[pasoActual].etiqueta)}</span> <h3 id="tour-titulo" class="font-heading text-lg font-bold text-neutral-900 sm:text-xl dark:text-neutral-50">${escape_html(pasos[pasoActual].titulo)}</h3></div></div> <p class="mt-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">${escape_html(pasos[pasoActual].descripcion)}</p> <div class="mt-4 flex items-start gap-2.5 rounded-xl border border-neutral-200 bg-neutral-50/80 p-3 text-xs text-neutral-700 dark:border-neutral-800 dark:bg-neutral-800/60 dark:text-neutral-300"><svg class="h-4 w-4 shrink-0 text-accent-600 mt-0.5 dark:text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"></path></svg> <span class="leading-relaxed font-medium">${escape_html(pasos[pasoActual].destaque)}</span></div></div>`);
+			$$renderer.push(`<!----> <div class="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-neutral-200 pt-4 dark:border-neutral-800"><div class="flex items-center gap-1.5" aria-label="Progreso del tour"><!--[-->`);
+			const each_array = ensure_array_like(pasos);
+			for (let i = 0, $$length = each_array.length; i < $$length; i++) {
+				each_array[i];
+				$$renderer.push(`<button type="button"${attr_class(`h-2 rounded-full transition-all duration-200 cursor-pointer ${i === pasoActual ? "w-6 bg-primary-600 dark:bg-primary-500" : "w-2 bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600"}`)}${attr("aria-label", `Ir al paso ${stringify(i + 1)}`)}></button>`);
+			}
+			$$renderer.push(`<!--]--></div> <div class="flex items-center gap-2"><button type="button" class="px-3 py-1.5 text-xs font-semibold text-neutral-500 hover:text-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 rounded-md cursor-pointer dark:text-neutral-400 dark:hover:text-neutral-200">Omitir</button> `);
+			if (pasoActual > 0) {
+				$$renderer.push("<!--[0-->");
+				Button($$renderer, {
+					variant: "secondary",
+					size: "sm",
+					onclick: anterior,
+					children: ($$renderer) => {
+						$$renderer.push(`<!---->Anterior`);
+					},
+					$$slots: { default: true }
+				});
+			} else $$renderer.push("<!--[-1-->");
+			$$renderer.push(`<!--]--> `);
+			Button($$renderer, {
+				variant: "primary",
+				size: "sm",
+				onclick: siguiente,
+				children: ($$renderer) => {
+					$$renderer.push(`<!---->${escape_html(pasoActual === pasos.length - 1 ? "¡Comenzar!" : "Siguiente")}`);
+				},
+				$$slots: { default: true }
+			});
+			$$renderer.push(`<!----></div></div></div></div>`);
+		} else $$renderer.push("<!--[-1-->");
+		$$renderer.push(`<!--]-->`);
 	});
-}
-//#endregion
-//#region src/lib/chartTheme.js
-/**
-* Colores de Chart.js según el tema activo. Los gráficos se dibujan en
-* canvas, así que no heredan las variantes `dark:` de Tailwind: hay que
-* pasarles los colores explícitamente y recalcularlos al cambiar el tema.
-*/
-function chartTheme(isDark) {
-	return {
-		grid: isDark ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.05)",
-		tick: isDark ? "#94a3b8" : "#64748b",
-		legend: isDark ? "#cbd5e1" : "#475569",
-		tooltipBg: isDark ? "rgba(2, 6, 23, 0.96)" : "rgba(15, 23, 42, 0.95)",
-		/** Borde entre segmentos (doughnut): debe igualar el fondo de la tarjeta. */
-		surface: isDark ? "#0f172a" : "#ffffff"
-	};
 }
 //#endregion
 //#region src/routes/(app)/dashboard/+page.svelte
@@ -312,13 +350,25 @@ function _page($$renderer, $$props) {
 				const each_array_2 = ensure_array_like(ultimosPatrones());
 				for (let $$index_2 = 0, $$length = each_array_2.length; $$index_2 < $$length; $$index_2++) {
 					let patron = each_array_2[$$index_2];
-					$$renderer.push(`<li class="flex items-start justify-between gap-4 py-3 transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800/50 -mx-5 px-5 first:pt-0 last:pb-0"><div class="flex items-start gap-3"><div class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-accent-400/15"><svg class="h-3.5 w-3.5 text-accent-600 dark:text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"></path></svg></div> <div><p class="text-sm font-medium text-neutral-900 dark:text-neutral-100">${escape_html(patron.titulo)}</p> <p class="text-xs text-neutral-500 dark:text-neutral-400">${escape_html(formatDate(patron.fecha))}</p></div></div> <a${attr("href", `/patrones/${stringify(patron.id)}`)} class="shrink-0 text-sm font-medium text-primary-700 hover:underline dark:text-primary-400">Ver detalle</a></li>`);
+					$$renderer.push(`<li class="flex items-center justify-between gap-4 py-3 transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800/50 -mx-5 px-5 first:pt-0 last:pb-0"><div class="flex items-start gap-3 min-w-0"><div class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-accent-400/15"><svg class="h-3.5 w-3.5 text-accent-600 dark:text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"></path></svg></div> <div class="min-w-0"><p class="text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">${escape_html(patron.titulo)}</p> <p class="text-xs text-neutral-500 dark:text-neutral-400">${escape_html(formatDate(patron.fecha))}</p></div></div> <div class="flex items-center gap-3 shrink-0">`);
+					if (patron.porcentaje) {
+						$$renderer.push("<!--[0-->");
+						ProgressRing($$renderer, {
+							value: patron.porcentaje,
+							size: "sm",
+							tone: "accent",
+							ariaLabel: `${stringify(patron.porcentaje)}% de correlación`
+						});
+					} else $$renderer.push("<!--[-1-->");
+					$$renderer.push(`<!--]--> <a${attr("href", `/patrones/${stringify(patron.id)}`)} class="text-xs font-semibold text-primary-700 hover:underline dark:text-primary-400">Detalle</a></div></li>`);
 				}
 				$$renderer.push(`<!--]--></ul>`);
 			},
 			$$slots: { default: true }
 		});
-		$$renderer.push(`<!----></div></div></div>`);
+		$$renderer.push(`<!----></div></div> `);
+		TourGuide($$renderer, {});
+		$$renderer.push(`<!----></div>`);
 		if ($$store_subs) unsubscribe_stores($$store_subs);
 	});
 }

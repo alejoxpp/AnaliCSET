@@ -91,30 +91,30 @@
 			<div class="relative h-[300px] sm:h-[340px]" aria-hidden="true">
 				<!-- Acta de atrás -->
 				<div
-					class="animate-fade-in absolute top-0 right-4 hidden w-[74%] rotate-[4deg] rounded-xl border border-neutral-200 bg-white p-4 shadow-sm sm:block dark:border-neutral-800 dark:bg-neutral-900"
+					class="animate-fade-in absolute top-0 right-2 hidden w-[80%] rotate-[5deg] rounded-xl border border-neutral-200 bg-neutral-100 p-4 sm:block dark:border-neutral-700 dark:bg-neutral-800"
 					style="animation-delay: 220ms"
 				>
 					<p class="font-heading text-xs font-bold text-neutral-400 dark:text-neutral-500">
 						CSET-2026-254
 					</p>
 					<div class="mt-3 space-y-2">
-						<div class="h-2 w-full rounded-full bg-neutral-100 dark:bg-neutral-800"></div>
-						<div class="h-2 w-4/5 rounded-full bg-neutral-100 dark:bg-neutral-800"></div>
-						<div class="h-2 w-2/3 rounded-full bg-neutral-100 dark:bg-neutral-800"></div>
+						<div class="h-2 w-full rounded-full bg-neutral-200 dark:bg-neutral-700"></div>
+						<div class="h-2 w-4/5 rounded-full bg-neutral-200 dark:bg-neutral-700"></div>
+						<div class="h-2 w-2/3 rounded-full bg-neutral-200 dark:bg-neutral-700"></div>
 					</div>
 				</div>
 
 				<!-- Acta intermedia -->
 				<div
-					class="animate-fade-in absolute top-10 right-0 hidden w-[78%] -rotate-[3deg] rounded-xl border border-neutral-200 bg-white p-4 shadow-md sm:block dark:border-neutral-800 dark:bg-neutral-900"
+					class="animate-fade-in absolute top-9 right-0 hidden w-[86%] -rotate-[2deg] rounded-xl border border-neutral-200 bg-neutral-50 p-4 shadow-sm sm:block dark:border-neutral-700 dark:bg-neutral-800/70"
 					style="animation-delay: 140ms"
 				>
 					<p class="font-heading text-xs font-bold text-neutral-400 dark:text-neutral-500">
 						CSET-2026-255
 					</p>
 					<div class="mt-3 space-y-2">
-						<div class="h-2 w-full rounded-full bg-neutral-100 dark:bg-neutral-800"></div>
-						<div class="h-2 w-3/4 rounded-full bg-neutral-100 dark:bg-neutral-800"></div>
+						<div class="h-2 w-full rounded-full bg-neutral-200 dark:bg-neutral-700"></div>
+						<div class="h-2 w-3/4 rounded-full bg-neutral-200 dark:bg-neutral-700"></div>
 					</div>
 				</div>
 
@@ -229,7 +229,10 @@
 	</section>
 
 	<!-- ═══ Cómo funciona (franja navy: único acento fuerte de la página) ═══ -->
-	<section class="bg-primary-900 dark:bg-neutral-900">
+	<!-- La franja conserva el azul institucional también en oscuro: es el
+	     único acento fuerte de la página y contra el fondo casi negro
+	     seguiría leyéndose como corte estructural. -->
+	<section class="bg-primary-900">
 		<div class="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
 			<h2 class="font-heading max-w-xl text-2xl font-bold tracking-tight text-white sm:text-3xl">
 				Del archivo al patrón, en tres pasos.
@@ -237,16 +240,16 @@
 
 			<ol class="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-10">
 				{#each pasos as paso, i}
-					<li class="border-t pt-5 {paso.ia ? 'border-accent-500' : 'border-primary-700 dark:border-neutral-700'}">
+					<li class="border-t pt-5 {paso.ia ? 'border-accent-500' : 'border-primary-700'}">
 						<span
 							class="font-heading text-sm font-bold {paso.ia
 								? 'text-accent-400'
-								: 'text-primary-300 dark:text-neutral-500'}"
+								: 'text-primary-300'}"
 						>
 							{i + 1}
 						</span>
 						<p class="font-heading mt-2 text-base font-bold text-white">{paso.titulo}</p>
-						<p class="mt-2 text-sm leading-relaxed text-primary-200 dark:text-neutral-400">
+						<p class="mt-2 text-sm leading-relaxed text-primary-200">
 							{paso.texto}
 						</p>
 					</li>

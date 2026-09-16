@@ -5,6 +5,8 @@
 	import ChartWrapper from '$lib/components/ChartWrapper.svelte';
 	import InsightCard from '$lib/components/InsightCard.svelte';
 	import PrintButton from '$lib/components/PrintButton.svelte';
+	import ProgressRing from '$lib/components/ProgressRing.svelte';
+	import TourGuide from '$lib/components/TourGuide.svelte';
 	import { theme } from '$lib/stores/theme.js';
 	import { chartTheme } from '$lib/chartTheme.js';
 
@@ -290,16 +292,16 @@
 			<Card title="Últimos patrones detectados por IA">
 				<ul class="divide-y divide-neutral-100 dark:divide-neutral-800">
 					{#each ultimosPatrones as patron (patron.id)}
-						<li class="flex items-start justify-between gap-4 py-3 transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800/50 -mx-5 px-5 first:pt-0 last:pb-0">
-							<div class="flex items-start gap-3">
+						<li class="flex items-center justify-between gap-4 py-3 transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800/50 -mx-5 px-5 first:pt-0 last:pb-0">
+							<div class="flex items-start gap-3 min-w-0">
 								<!-- Ícono sparkle (IA) -->
 								<div class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-accent-400/15">
 									<svg class="h-3.5 w-3.5 text-accent-600 dark:text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
 										<path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" />
 									</svg>
 								</div>
-								<div>
-									<p class="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+								<div class="min-w-0">
+									<p class="text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">
 										{patron.titulo}
 									</p>
 									<p class="text-xs text-neutral-500 dark:text-neutral-400">
@@ -307,16 +309,29 @@
 									</p>
 								</div>
 							</div>
-							<a
-								href="/patrones/{patron.id}"
-								class="shrink-0 text-sm font-medium text-primary-700 hover:underline dark:text-primary-400"
-							>
-								Ver detalle
-							</a>
+							<div class="flex items-center gap-3 shrink-0">
+								{#if patron.porcentaje}
+									<ProgressRing
+										value={patron.porcentaje}
+										size="sm"
+										tone="accent"
+										ariaLabel="{patron.porcentaje}% de correlación"
+									/>
+								{/if}
+								<a
+									href="/patrones/{patron.id}"
+									class="text-xs font-semibold text-primary-700 hover:underline dark:text-primary-400"
+								>
+									Detalle
+								</a>
+							</div>
 						</li>
 					{/each}
 				</ul>
 			</Card>
 		</div>
 	</div>
+
+	<!-- Modal de Tour Guiado (primer login) -->
+	<TourGuide />
 </div>

@@ -41,3 +41,35 @@ export async function getPatronesByActaId(idActa) {
 		throw err;
 	}
 }
+
+/**
+ * Obtiene el detalle de un patrón específico por su ID.
+ * @param {string} id
+ * @returns {Promise<any>}
+ */
+export async function getPatronById(id) {
+	try {
+		await new Promise((resolve) => setTimeout(resolve, 150));
+		const idMap = {
+			'p-104': 'pat-01',
+			'p-103': 'pat-02',
+			'p-102': 'pat-03'
+		};
+		const targetId = idMap[id] || id;
+		const patron = mockPatrones.patrones.find((p) => p.id === targetId);
+
+		if (patron) {
+			return patron;
+		}
+
+		return {
+			...mockPatrones.patrones[0],
+			id,
+			nombre: `Patrón formativo ${id}`
+		};
+	} catch (err) {
+		notifyError(err, 'No se pudo cargar la información del patrón');
+		throw err;
+	}
+}
+

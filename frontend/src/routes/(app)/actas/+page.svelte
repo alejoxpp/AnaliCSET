@@ -1,9 +1,11 @@
 <script>
 	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
+	import { goto, replaceState } from '$app/navigation';
 	import Card from '$lib/components/Card.svelte';
 	import Badge from '$lib/components/Badge.svelte';
 	import Button from '$lib/components/Button.svelte';
+	import EmptyState from '$lib/components/EmptyState.svelte';
+	import PrintButton from '$lib/components/PrintButton.svelte';
 	import Skeleton from '$lib/components/Skeleton.svelte';
 	import { toasts } from '$lib/stores/toast.js';
 
@@ -59,7 +61,7 @@
 
 		const newSearch = params.toString() ? `?${params.toString()}` : '';
 		if (window.location.search !== newSearch) {
-			window.history.replaceState(null, '', `${window.location.pathname}${newSearch}`);
+			replaceState(`${window.location.pathname}${newSearch}`, {});
 		}
 	});
 
@@ -125,14 +127,17 @@
 
 <div class="animate-fade-in-up space-y-5">
 	<!-- ═══ Encabezado de la Sección ═══ -->
-	<div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+	<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 		<div>
-			<h2 class="font-heading text-xl font-bold tracking-tight text-neutral-900 sm:text-2xl">
+			<h2 class="font-heading text-xl font-bold tracking-tight text-neutral-900 sm:text-2xl dark:text-neutral-50">
 				Consulta de Actas CSET
 			</h2>
-			<p class="text-xs sm:text-sm text-neutral-600">
+			<p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300">
 				Histórico de sesiones ordinarias y extraordinarias del Comité de Evaluación y Seguimiento.
 			</p>
+		</div>
+		<div class="print:hidden">
+			<PrintButton label="Imprimir listado" />
 		</div>
 	</div>
 
@@ -141,7 +146,7 @@
 		<div class="flex flex-wrap items-end gap-4">
 			<!-- Consecutivo / Ficha -->
 			<div class="flex min-w-[200px] flex-1 flex-col gap-1">
-				<label for="filtro-consecutivo" class="text-xs font-semibold text-neutral-700">
+				<label for="filtro-consecutivo" class="text-xs font-semibold text-neutral-700 dark:text-neutral-200">
 					Consecutivo o ficha
 				</label>
 				<input
@@ -150,42 +155,42 @@
 					bind:value={filtroConsecutivo}
 					placeholder="Ej: CSET-2026-256 o 2758421"
 					class="w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 placeholder:text-neutral-400
-						focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+						focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-50 dark:placeholder:text-neutral-500"
 				/>
 			</div>
 
 			<!-- Fecha desde -->
 			<div class="flex w-full sm:w-auto flex-col gap-1">
-				<label for="filtro-desde" class="text-xs font-semibold text-neutral-700">Desde</label>
+				<label for="filtro-desde" class="text-xs font-semibold text-neutral-700 dark:text-neutral-200">Desde</label>
 				<input
 					id="filtro-desde"
 					type="date"
 					bind:value={filtroFechaDesde}
 					class="w-full sm:w-auto rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900
-						focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+						focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-50"
 				/>
 			</div>
 
 			<!-- Fecha hasta -->
 			<div class="flex w-full sm:w-auto flex-col gap-1">
-				<label for="filtro-hasta" class="text-xs font-semibold text-neutral-700">Hasta</label>
+				<label for="filtro-hasta" class="text-xs font-semibold text-neutral-700 dark:text-neutral-200">Hasta</label>
 				<input
 					id="filtro-hasta"
 					type="date"
 					bind:value={filtroFechaHasta}
 					class="w-full sm:w-auto rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900
-						focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+						focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-50"
 				/>
 			</div>
 
 			<!-- Estado -->
 			<div class="flex w-full sm:w-auto flex-col gap-1">
-				<label for="filtro-estado" class="text-xs font-semibold text-neutral-700">Estado</label>
+				<label for="filtro-estado" class="text-xs font-semibold text-neutral-700 dark:text-neutral-200">Estado</label>
 				<select
 					id="filtro-estado"
 					bind:value={filtroEstado}
 					class="w-full sm:w-auto rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900
-						focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+						focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-50"
 				>
 					<option value="">Todos</option>
 					{#each estadosUnicos as estado}
@@ -199,7 +204,7 @@
 				<button
 					type="button"
 					onclick={limpiarFiltros}
-					class="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-neutral-500 transition-colors hover:text-danger-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-danger-500 cursor-pointer"
+					class="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-neutral-500 transition-colors hover:text-danger-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-danger-500 cursor-pointer dark:text-neutral-400 dark:hover:text-danger-500"
 					aria-label="Restablecer todos los filtros"
 				>
 					<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
@@ -216,39 +221,53 @@
 		{#if cargando}
 			<Skeleton type="table" lines={6} />
 		{:else if actasFiltradas.length === 0}
-			<!-- Estado vacío -->
-			<div class="flex flex-col items-center justify-center py-12 text-center">
-				<svg class="mb-3 h-12 w-12 text-neutral-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1" aria-hidden="true">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
-				</svg>
-				<p class="text-sm font-medium text-neutral-600">No se encontraron actas con los criterios especificados</p>
-				<p class="mt-1 text-xs text-neutral-400">
+			<!-- Estado vacío estructurado con ilustración y acción -->
+			<EmptyState
+				title="No se encontraron actas con los criterios especificados"
+				description={hayFiltrosActivos
+					? 'Prueba modificando o restableciendo los filtros de búsqueda para consultar más actas.'
+					: 'No hay registros de actas en el sistema actualmente.'}
+			>
+				{#snippet icon()}
+					<svg
+						class="h-8 w-8 text-neutral-400 dark:text-neutral-400"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="1.5"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6"
+						/>
+					</svg>
+				{/snippet}
+				{#snippet action()}
 					{#if hayFiltrosActivos}
-						Prueba modificando los filtros de búsqueda o
-						<button type="button" onclick={limpiarFiltros} class="text-primary-600 underline font-medium cursor-pointer">
-							restablécelos todos
-						</button>.
-					{:else}
-						No hay registros de actas en el sistema actualmente.
+						<Button variant="secondary" size="sm" onclick={limpiarFiltros}>
+							Restablecer filtros
+						</Button>
 					{/if}
-				</p>
-			</div>
+				{/snippet}
+			</EmptyState>
 		{:else}
 			<!-- Contador de resultados -->
 			<div class="mb-3 flex items-center justify-between">
-				<p class="text-xs sm:text-sm text-neutral-500">
+				<p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400">
 					{actasFiltradas.length} acta{actasFiltradas.length !== 1 ? 's' : ''}
 					{hayFiltrosActivos ? ' encontradas' : ' en total'}
 				</p>
-				<p class="text-xs text-neutral-400">
+				<p class="text-xs text-neutral-400 dark:text-neutral-500">
 					Página {paginaActual} de {totalPaginas}
 				</p>
 			</div>
 
 			<!-- Tabla con soporte responsive y clic en fila para navegar al detalle -->
-			<div class="overflow-x-auto rounded-lg border border-neutral-200">
+			<div class="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
 				<table class="w-full border-collapse text-left text-sm">
-					<thead class="bg-neutral-50 text-xs font-semibold tracking-wide text-neutral-600 uppercase border-b border-neutral-200">
+					<thead class="bg-neutral-50 text-xs font-semibold tracking-wide text-neutral-600 uppercase border-b border-neutral-200 dark:bg-neutral-800/50 dark:text-neutral-300 dark:border-neutral-800">
 						<tr>
 							<th scope="col" class="px-4 py-3 font-semibold">Consecutivo</th>
 							<th scope="col" class="px-4 py-3 font-semibold">Ficha</th>
@@ -258,30 +277,30 @@
 							<th scope="col" class="px-4 py-3 font-semibold text-right">Acción</th>
 						</tr>
 					</thead>
-					<tbody class="divide-y divide-neutral-200 text-neutral-800">
+					<tbody class="divide-y divide-neutral-200 text-neutral-800 dark:divide-neutral-800 dark:text-neutral-100">
 						{#each actasPaginadas as acta (acta.id)}
 							<tr
 								onclick={() => navegarADetalle(acta.id)}
-								class="group transition-colors hover:bg-neutral-50/80 cursor-pointer"
+								class="group transition-colors hover:bg-neutral-50/80 cursor-pointer dark:hover:bg-neutral-800/50"
 								title="Ver detalle del acta {acta.consecutivo}"
 							>
-								<td class="px-4 py-3 font-bold text-primary-700 group-hover:underline">
+								<td class="px-4 py-3 font-bold text-primary-700 group-hover:underline dark:text-primary-400">
 									{acta.consecutivo}
 								</td>
-								<td class="px-4 py-3 text-neutral-600">
-									<span class="font-medium text-neutral-800">{acta.ficha}</span>
+								<td class="px-4 py-3 text-neutral-600 dark:text-neutral-300">
+									<span class="font-medium text-neutral-800 dark:text-neutral-100">{acta.ficha}</span>
 									{#if acta.programa}
-										<span class="hidden md:inline text-xs text-neutral-400 block truncate max-w-xs">{acta.programa}</span>
+										<span class="hidden md:inline text-xs text-neutral-400 block truncate max-w-xs dark:text-neutral-500">{acta.programa}</span>
 									{/if}
 								</td>
-								<td class="px-4 py-3 text-neutral-600 whitespace-nowrap">{formatDate(acta.fecha)}</td>
+								<td class="px-4 py-3 text-neutral-600 whitespace-nowrap dark:text-neutral-300">{formatDate(acta.fecha)}</td>
 								<td class="px-4 py-3">
 									<Badge variant={estadoVariant[acta.estado] ?? 'neutral'}>
 										{acta.estado}
 									</Badge>
 								</td>
 								<td class="px-4 py-3 text-right">
-									<span class="inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-neutral-100 px-2 text-xs font-bold text-neutral-800">
+									<span class="inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-neutral-100 px-2 text-xs font-bold text-neutral-800 dark:bg-neutral-800 dark:text-neutral-100">
 										{acta.totalCasos}
 									</span>
 								</td>
@@ -289,7 +308,7 @@
 									<button
 										type="button"
 										onclick={(e) => { e.stopPropagation(); navegarADetalle(acta.id); }}
-										class="inline-flex items-center gap-1 rounded px-2.5 py-1 text-xs font-semibold text-primary-700 hover:bg-primary-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 cursor-pointer"
+										class="inline-flex items-center gap-1 rounded px-2.5 py-1 text-xs font-semibold text-primary-700 hover:bg-primary-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 cursor-pointer dark:text-primary-400 dark:hover:bg-primary-500/10"
 										aria-label="Ver detalle del acta {acta.consecutivo}"
 									>
 										Ver detalle
@@ -312,7 +331,7 @@
 						disabled={paginaActual <= 1}
 						onclick={() => (paginaActual = Math.max(1, paginaActual - 1))}
 						class="inline-flex items-center gap-1 rounded-md border border-neutral-200 bg-white px-2.5 py-1.5 text-xs sm:text-sm font-medium text-neutral-600 transition-colors
-							hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 cursor-pointer"
+							hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 cursor-pointer dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800/50"
 						aria-label="Página anterior"
 					>
 						<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
@@ -328,7 +347,7 @@
 							class="inline-flex h-8 w-8 items-center justify-center rounded-md text-xs sm:text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 cursor-pointer
 								{pagina === paginaActual
 								? 'bg-primary-600 text-white shadow-xs'
-								: 'text-neutral-700 hover:bg-neutral-100'}"
+								: 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800'}"
 							aria-label="Ir a página {pagina}"
 							aria-current={pagina === paginaActual ? 'page' : undefined}
 						>
@@ -341,7 +360,7 @@
 						disabled={paginaActual >= totalPaginas}
 						onclick={() => (paginaActual = Math.min(totalPaginas, paginaActual + 1))}
 						class="inline-flex items-center gap-1 rounded-md border border-neutral-200 bg-white px-2.5 py-1.5 text-xs sm:text-sm font-medium text-neutral-600 transition-colors
-							hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 cursor-pointer"
+							hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 cursor-pointer dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800/50"
 						aria-label="Página siguiente"
 					>
 						<span class="hidden sm:inline">Siguiente</span>

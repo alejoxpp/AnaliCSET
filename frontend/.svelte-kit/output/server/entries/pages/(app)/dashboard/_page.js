@@ -73,17 +73,20 @@ var dashboard_default = {
 		{
 			"id": "p-104",
 			"titulo": "Reincidencia en inasistencia — Ficha 2758421",
-			"fecha": "2026-09-08"
+			"fecha": "2026-09-08",
+			"porcentaje": 28
 		},
 		{
 			"id": "p-103",
 			"titulo": "Pico de deserción en el trimestre III",
-			"fecha": "2026-09-05"
+			"fecha": "2026-09-05",
+			"porcentaje": 22
 		},
 		{
 			"id": "p-102",
 			"titulo": "Correlación entre bajo rendimiento y cambios de instructor",
-			"fecha": "2026-08-29"
+			"fecha": "2026-08-29",
+			"porcentaje": 18
 		}
 	],
 	insight: {

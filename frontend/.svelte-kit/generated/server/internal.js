@@ -26,7 +26,7 @@ export const options = {
 		app: ({ head, body, assets, nonce, env }) => "<!doctype html>\n<html lang=\"es\">\n\t<head>\n\t\t<meta charset=\"utf-8\" />\n\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n\t\t<meta name=\"text-scale\" content=\"scale\" />\n\t\t<link rel=\"icon\" type=\"image/png\" href=\"/favicon.png\" />\n\t\t<link rel=\"apple-touch-icon\" href=\"/logo-icon.png\" />\n\t\t<meta name=\"theme-color\" content=\"#0D69FC\" />\n\t\t<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" />\n\t\t<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"anonymous\" />\n\t\t<link\n\t\t\trel=\"stylesheet\"\n\t\t\thref=\"https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap\"\n\t\t/>\n\t\t<script>\n\t\t\t// Aplica el tema antes del primer pintado para evitar el parpadeo\n\t\t\t// blanco al recargar en modo oscuro. Debe coincidir con la lógica\n\t\t\t// de src/lib/stores/theme.js.\n\t\t\t(function () {\n\t\t\t\ttry {\n\t\t\t\t\tvar stored = localStorage.getItem('analicset_theme');\n\t\t\t\t\tvar dark = stored\n\t\t\t\t\t\t? stored === 'dark'\n\t\t\t\t\t\t: window.matchMedia('(prefers-color-scheme: dark)').matches;\n\t\t\t\t\tif (dark) document.documentElement.classList.add('dark');\n\t\t\t\t} catch (e) {}\n\t\t\t})();\n\t\t</script>\n\t\t" + head + "\n\t</head>\n\t<body data-sveltekit-preload-data=\"hover\">\n\t\t<div style=\"display: contents\">" + body + "</div>\n\t</body>\n</html>\n",
 		error
 	},
-	version_hash: "kgxei9"
+	version_hash: "1nk6tlo"
 };
 
 export async function get_hooks() {

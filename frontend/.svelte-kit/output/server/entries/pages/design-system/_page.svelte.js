@@ -1,9 +1,12 @@
 import { T as escape_html, a as derived, c as props_id, d as stringify, i as bind_props, o as ensure_array_like, r as attributes, s as head, t as attr_class, w as attr } from "../../../chunks/server.js";
 import { t as toasts } from "../../../chunks/toast.js";
-import { t as Card } from "../../../chunks/Card.js";
-import { t as Badge } from "../../../chunks/Badge.js";
-import { n as Spinner, t as Button } from "../../../chunks/Button.js";
+import { t as ThemeToggle } from "../../../chunks/ThemeToggle.js";
+import { n as Spinner, r as Card, t as Button } from "../../../chunks/Button.js";
+import { n as Badge, t as PrintButton } from "../../../chunks/PrintButton.js";
+import { t as EmptyState } from "../../../chunks/EmptyState.js";
 import { t as Skeleton } from "../../../chunks/Skeleton.js";
+import { t as ProgressRing } from "../../../chunks/ProgressRing.js";
+import { t as InsightCard } from "../../../chunks/InsightCard.js";
 //#region src/lib/components/Input.svelte
 function Input($$renderer, $$props) {
 	$$renderer.component(($$renderer) => {
@@ -201,32 +204,32 @@ function _page($$renderer, $$props) {
 					$$renderer.push(`<title>Sistema de diseño · AnaliCSET</title>`);
 				});
 			});
-			$$renderer.push(`<div class="mx-auto max-w-5xl space-y-14 px-6 py-10"><header><h1 class="font-heading text-3xl font-semibold text-neutral-900">Sistema de diseño</h1> <p class="mt-2 text-neutral-600">Componentes base de AnaliCSET. Revísalos aquí antes de construir pantallas reales.</p></header> <section class="space-y-4"><h2 class="font-heading text-xl font-semibold text-neutral-900">Paleta</h2> <div class="grid grid-cols-2 gap-6 sm:grid-cols-4"><div class="space-y-1"><p class="text-sm font-medium text-neutral-700">Primary</p> <div class="overflow-hidden rounded-md border border-neutral-200"><!--[-->`);
+			$$renderer.push(`<div class="mx-auto max-w-5xl space-y-14 px-6 py-10"><header><h1 class="font-heading text-3xl font-semibold text-neutral-900 dark:text-neutral-50">Sistema de diseño</h1> <p class="mt-2 text-neutral-600 dark:text-neutral-300">Componentes base de AnaliCSET. Revísalos aquí antes de construir pantallas reales.</p></header> <section class="space-y-4"><h2 class="font-heading text-xl font-semibold text-neutral-900 dark:text-neutral-50">Paleta</h2> <div class="grid grid-cols-2 gap-6 sm:grid-cols-4"><div class="space-y-1"><p class="text-sm font-medium text-neutral-700 dark:text-neutral-200">Primary</p> <div class="overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-800"><!--[-->`);
 			const each_array = ensure_array_like(primaryShades);
 			for (let $$index = 0, $$length = each_array.length; $$index < $$length; $$index++) {
 				let shade = each_array[$$index];
 				$$renderer.push(`<div${attr_class(`flex h-6 items-center px-2 text-[10px] text-white/90 ${stringify(shade.class)}`)}>${escape_html(shade.label)}</div>`);
 			}
-			$$renderer.push(`<!--]--></div></div> <div class="space-y-1"><p class="text-sm font-medium text-neutral-700">Neutral</p> <div class="overflow-hidden rounded-md border border-neutral-200"><!--[-->`);
+			$$renderer.push(`<!--]--></div></div> <div class="space-y-1"><p class="text-sm font-medium text-neutral-700 dark:text-neutral-200">Neutral</p> <div class="overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-800"><!--[-->`);
 			const each_array_1 = ensure_array_like(neutralShades);
 			for (let $$index_1 = 0, $$length = each_array_1.length; $$index_1 < $$length; $$index_1++) {
 				let shade = each_array_1[$$index_1];
 				$$renderer.push(`<div${attr_class(`flex h-6 items-center px-2 text-[10px] text-white/90 ${stringify(shade.class)}`)}>${escape_html(shade.label)}</div>`);
 			}
-			$$renderer.push(`<!--]--></div></div> <div class="space-y-1"><p class="text-sm font-medium text-neutral-700">Accent (solo IA/patrones)</p> <div class="overflow-hidden rounded-md border border-neutral-200"><!--[-->`);
+			$$renderer.push(`<!--]--></div></div> <div class="space-y-1"><p class="text-sm font-medium text-neutral-700 dark:text-neutral-200">Accent (solo IA/patrones)</p> <div class="overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-800"><!--[-->`);
 			const each_array_2 = ensure_array_like(accentShades);
 			for (let $$index_2 = 0, $$length = each_array_2.length; $$index_2 < $$length; $$index_2++) {
 				let shade = each_array_2[$$index_2];
 				$$renderer.push(`<div${attr_class(`flex h-6 items-center px-2 text-[10px] text-white/90 ${stringify(shade.class)}`)}>${escape_html(shade.label)}</div>`);
 			}
-			$$renderer.push(`<!--]--></div></div> <div class="space-y-1"><p class="text-sm font-medium text-neutral-700">Semantic</p> <div class="overflow-hidden rounded-md border border-neutral-200"><!--[-->`);
+			$$renderer.push(`<!--]--></div></div> <div class="space-y-1"><p class="text-sm font-medium text-neutral-700 dark:text-neutral-200">Semantic</p> <div class="overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-800"><!--[-->`);
 			const each_array_3 = ensure_array_like(semanticShades);
 			for (let $$index_3 = 0, $$length = each_array_3.length; $$index_3 < $$length; $$index_3++) {
 				let shade = each_array_3[$$index_3];
 				$$renderer.push(`<div${attr_class(`flex h-6 items-center px-2 text-[10px] text-white/90 ${stringify(shade.class)}`)}>${escape_html(shade.label)}</div>`);
 			}
-			$$renderer.push(`<!--]--></div></div></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900">Tipografía</h2> <div class="space-y-2 rounded-lg border border-neutral-200 bg-white p-5"><p class="font-heading text-2xl font-semibold">Fraunces — Títulos (font-heading)</p> <p class="font-body text-base text-neutral-700">Public Sans — Texto de cuerpo (font-body). Diseñada para comunicaciones de gobierno: seria,
-				legible y sin el aire genérico de una fuente de plantilla.</p></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900">Button</h2> <div class="flex flex-wrap items-center gap-3 rounded-lg border border-neutral-200 bg-white p-5">`);
+			$$renderer.push(`<!--]--></div></div></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900 dark:text-neutral-50">Tipografía</h2> <div class="space-y-2 rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900"><p class="font-heading text-2xl font-semibold">Fraunces — Títulos (font-heading)</p> <p class="font-body text-base text-neutral-700 dark:text-neutral-200">Public Sans — Texto de cuerpo (font-body). Diseñada para comunicaciones de gobierno: seria,
+				legible y sin el aire genérico de una fuente de plantilla.</p></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900 dark:text-neutral-50">Button</h2> <div class="flex flex-wrap items-center gap-3 rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900">`);
 			Button($$renderer, {
 				variant: "primary",
 				children: ($$renderer) => {
@@ -269,7 +272,7 @@ function _page($$renderer, $$props) {
 				},
 				$$slots: { default: true }
 			});
-			$$renderer.push(`<!----></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900">Input</h2> <div class="grid gap-4 rounded-lg border border-neutral-200 bg-white p-5 sm:grid-cols-3">`);
+			$$renderer.push(`<!----></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900 dark:text-neutral-50">Input</h2> <div class="grid gap-4 rounded-lg border border-neutral-200 bg-white p-5 sm:grid-cols-3 dark:border-neutral-800 dark:bg-neutral-900">`);
 			Input($$renderer, {
 				label: "Nombre",
 				placeholder: "Escribe tu nombre",
@@ -293,18 +296,18 @@ function _page($$renderer, $$props) {
 				value: "No editable",
 				disabled: true
 			});
-			$$renderer.push(`<!----></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900">Card</h2> <div class="grid gap-4 sm:grid-cols-2">`);
+			$$renderer.push(`<!----></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900 dark:text-neutral-50">Card</h2> <div class="grid gap-4 sm:grid-cols-2">`);
 			Card($$renderer, {
 				title: "Acta CSET N.º 014",
 				children: ($$renderer) => {
-					$$renderer.push(`<p class="text-sm text-neutral-600">Comité de Evaluación y Seguimiento — sesión ordinaria. 12 casos revisados.</p>`);
+					$$renderer.push(`<p class="text-sm text-neutral-600 dark:text-neutral-300">Comité de Evaluación y Seguimiento — sesión ordinaria. 12 casos revisados.</p>`);
 				},
 				$$slots: { default: true }
 			});
 			$$renderer.push(`<!----> `);
 			{
 				function children($$renderer) {
-					$$renderer.push(`<p class="text-sm text-neutral-600">Contenido de la tarjeta.</p>`);
+					$$renderer.push(`<p class="text-sm text-neutral-600 dark:text-neutral-300">Contenido de la tarjeta.</p>`);
 				}
 				function footer($$renderer) {
 					Button($$renderer, {
@@ -325,7 +328,7 @@ function _page($$renderer, $$props) {
 					}
 				});
 			}
-			$$renderer.push(`<!----></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900">Badge</h2> <div class="flex flex-wrap gap-2 rounded-lg border border-neutral-200 bg-white p-5">`);
+			$$renderer.push(`<!----></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900 dark:text-neutral-50">Badge</h2> <div class="flex flex-wrap gap-2 rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900">`);
 			Badge($$renderer, {
 				variant: "neutral",
 				children: ($$renderer) => {
@@ -365,7 +368,7 @@ function _page($$renderer, $$props) {
 				},
 				$$slots: { default: true }
 			});
-			$$renderer.push(`<!----></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900">Table</h2> `);
+			$$renderer.push(`<!----></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900 dark:text-neutral-50">Table</h2> `);
 			{
 				function head($$renderer) {
 					$$renderer.push(`<tr><th class="px-4 py-3">Caso</th><th class="px-4 py-3">Aprendiz</th><th class="px-4 py-3">Estado</th></tr>`);
@@ -399,13 +402,13 @@ function _page($$renderer, $$props) {
 					}
 				});
 			}
-			$$renderer.push(`<!----></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900">Spinner</h2> <div class="flex items-center gap-6 rounded-lg border border-neutral-200 bg-white p-5">`);
+			$$renderer.push(`<!----></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900 dark:text-neutral-50">Spinner</h2> <div class="flex items-center gap-6 rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900">`);
 			Spinner($$renderer, { size: "sm" });
 			$$renderer.push(`<!----> `);
 			Spinner($$renderer, { size: "md" });
 			$$renderer.push(`<!----> `);
 			Spinner($$renderer, { size: "lg" });
-			$$renderer.push(`<!----></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900">Toast</h2> <div class="flex flex-wrap gap-3 rounded-lg border border-neutral-200 bg-white p-5">`);
+			$$renderer.push(`<!----></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900 dark:text-neutral-50">Toast</h2> <div class="flex flex-wrap gap-3 rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900">`);
 			Button($$renderer, {
 				variant: "secondary",
 				onclick: () => toasts.add("Cambios guardados", "success"),
@@ -432,13 +435,68 @@ function _page($$renderer, $$props) {
 				},
 				$$slots: { default: true }
 			});
-			$$renderer.push(`<!----></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900">Skeleton (Estados de carga)</h2> <div class="grid grid-cols-1 md:grid-cols-2 gap-4">`);
+			$$renderer.push(`<!----></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900 dark:text-neutral-50">Skeleton (Estados de carga)</h2> <div class="grid grid-cols-1 md:grid-cols-2 gap-4">`);
 			Skeleton($$renderer, { type: "card" });
 			$$renderer.push(`<!----> `);
 			Skeleton($$renderer, {
 				type: "table",
 				lines: 3
 			});
+			$$renderer.push(`<!----></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900 dark:text-neutral-50">ProgressRing (porcentajes)</h2> <div class="flex flex-wrap items-center gap-8 rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900">`);
+			ProgressRing($$renderer, {
+				value: 28,
+				size: "sm",
+				label: "correlación"
+			});
+			$$renderer.push(`<!----> `);
+			ProgressRing($$renderer, {
+				value: 64,
+				size: "md",
+				tone: "primary",
+				label: "cobertura"
+			});
+			$$renderer.push(`<!----> `);
+			ProgressRing($$renderer, {
+				value: 92,
+				size: "lg",
+				tone: "danger",
+				label: "riesgo"
+			});
+			$$renderer.push(`<!----></div></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900 dark:text-neutral-50">EmptyState</h2> `);
+			Card($$renderer, {
+				children: ($$renderer) => {
+					{
+						function action($$renderer) {
+							Button($$renderer, {
+								variant: "secondary",
+								children: ($$renderer) => {
+									$$renderer.push(`<!---->Limpiar filtros`);
+								},
+								$$slots: { default: true }
+							});
+						}
+						EmptyState($$renderer, {
+							title: "No se encontraron actas con los criterios especificados",
+							description: "Pruebe modificando los filtros de búsqueda o restablézcalos todos.",
+							action,
+							$$slots: { action: true }
+						});
+					}
+				},
+				$$slots: { default: true }
+			});
+			$$renderer.push(`<!----></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900 dark:text-neutral-50">InsightCard (hallazgo de IA)</h2> `);
+			InsightCard($$renderer, {
+				titulo: "Se detectó un incremento del 18% en casos de inasistencia reiterada",
+				descripcion: "Concentrado en fichas de jornada nocturna durante el último trimestre.",
+				delta: "18%",
+				trend: "up",
+				href: "/dashboard"
+			});
+			$$renderer.push(`<!----></section> <section class="space-y-3"><h2 class="font-heading text-xl font-semibold text-neutral-900 dark:text-neutral-50">Controles utilitarios</h2> <div class="flex flex-wrap items-center gap-4 rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900">`);
+			ThemeToggle($$renderer, {});
+			$$renderer.push(`<!----> `);
+			PrintButton($$renderer, {});
 			$$renderer.push(`<!----></div></section></div>`);
 		}
 		do {
