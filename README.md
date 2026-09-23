@@ -2,8 +2,8 @@
 
 ## 1. Identidad del equipo
 
-- **Nombre del equipo:** AnaliCSET
-- **Nombre del proyecto:** Análisis Histórico del Comité CSET con IA
+- **Nombre del equipo:** Pythones
+- **Nombre del proyecto:** Análisis Histórico del Comité CSET con IA - AnaliCSET
 - **Integrantes y roles:**
 
 | Integrante | Rol | Responsable de|
@@ -73,7 +73,7 @@ patrones_ia(id, caso_id, categoria, etiquetas, nivel_frecuencia)
 - **Base de datos:** Supabase.
 - **Dominio:** Subdominio gratis del host (analicset.vercel.app).
 - **CI/CD:** ¿cada push actualiza el sitio? (debe ser sí) Sí.
-- **Link del proyecto (cuando exista):** https://github.com/alejoxpp/AnaliCSET
+- **Link del proyecto:** https://github.com/alejoxpp/AnaliCSET
 
 ### Costos estimados de servidores
 Aunque usemos capas gratuitas para el curso, estimen qué costaría en "producción real":
@@ -82,9 +82,9 @@ Aunque usemos capas gratuitas para el curso, estimen qué costaría en "producci
 |---------|------------------|----------------------|
 | Hosting del backend | Render (Plan Starter) | $7 USD |
 | Base de datos | Supabase (Pro Plan) | $25 USD |
-| Dominio | Namecheap (anual) | $15 USD |
+| Dominio | Por Definir | - |
 | API de IA | OpenAI / Gemini API (pago por tokens) | $15 USD |
-| **Total estimado** | | **$62 USD / mes** |
+| **Total estimado** | | **$47 USD / mes** |
 
 ---
 
