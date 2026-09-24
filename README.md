@@ -1,95 +1,121 @@
 # AnaliCSET — Rama Frontend
 
-Esta rama del repositorio está dedicada al desarrollo del frontend de AnaliCSET.
+Plataforma web para el análisis, trazabilidad y gestión histórica del **Comité de Evaluación y Seguimiento (CSET)** del **SENA — Centro de Servicios Empresariales y Turísticos (Regional Santander, Bucaramanga)**.
 
-La idea de esta estructura es mantener centralizada la parte visual y la experiencia del usuario, mientras que cada proyecto o módulo del frontend puede vivir en su propia carpeta con su propia documentación técnica.
+Esta rama (`frontend`) centraliza el desarrollo de las interfaces de usuario, componentes reactivos, sistema de diseño visual y flujos de autenticación de la aplicación.
 
-## Objetivo de la rama
+---
 
-La rama `frontend` concentra la implementación de interfaces, componentes, layouts, landing pages y recursos visuales del proyecto.
+## 🎯 Contexto del Proyecto
 
-En esta estructura se está trabajando con una carpeta principal para la landing page documental del proyecto, que es la presentación institucional y de posicionamiento del producto.
+El sistema **AnaliCSET** tiene como objetivo optimizar la trazabilidad y la toma de decisiones institucionales en los comités evaluativos del SENA CSET mediante:
 
-## Estructura del repositorio
+* **Trazabilidad integral:** Seguimiento estructurado a las decisiones, citaciones y recomendaciones del comité.
+* **Historial centralizado:** Repositorio ágil para la consulta y análisis de casos acumulados.
+* **Acceso seguro:** Autenticación y control de visibilidad basado en roles de usuario.
+
+---
+
+## 🏗️ Estructura del Repositorio
 
 ```text
 AnaliCSET/
-├── README.md                         # Documentación general de la rama frontend
-├── Landing Page_AnaliCSET/           # Landing page documental del proyecto
-│   ├── README.md                     # Documentación local de instalación y ejecución
-│   ├── package.json
-│   ├── pnpm-lock.yaml
-│   ├── src/
-│   └── ...
-└── ...
+├── README.md                     # Documentación principal del repositorio y contexto del frontend
+└── frontend/                     # Aplicación web desarrollada en SvelteKit + Tailwind CSS
+    ├── README.md                 # Guía técnica específica del entorno frontend
+    ├── package.json              # Dependencias y scripts de ejecución
+    ├── svelte.config.js          # Configuración del framework SvelteKit
+    ├── tailwind.config.js        # Tokens de diseño y paleta institucional
+    ├── vite.config.js            # Configuración de Vite
+    ├── static/                   # Recursos estáticos (favicons, íconos)
+    └── src/
+        ├── app.html              # Plantilla HTML base
+        ├── app.css               # Directivas de Tailwind CSS
+        ├── lib/
+        │   └── assets/           # Logotipos institucionales (PNG, SVG transparentes)
+        └── routes/
+            ├── +layout.svelte    # Layout global de la aplicación
+            ├── +page.svelte      # Ruta raíz
+            └── login/
+                └── +page.svelte  # Interfaz de Login (Split-screen responsive)
 ```
 
-## Rama actual
+---
 
-```bash
-git checkout frontend
-```
+## 🎨 Sistema de Diseño (Design Tokens)
 
-O bien:
+El diseño visual está alineado con la identidad corporativa y configurado en `frontend/tailwind.config.js`:
 
-```bash
-git switch frontend
-```
+| Token | Valor Hex | Uso Principal |
+| :--- | :--- | :--- |
+| `brand-blue` | `#0E6DFF` | Color primario, botones CTA, enlaces y estados de foco |
+| `brand-blue-dark`| `#0A52C7` | Fondo del panel institucional y estados hover de botones |
+| `accent-cyan` | `#00C2FF` | Inicio del degradado insignia institucional |
+| `accent-green` | `#25ED4D` | Fin del degradado insignia institucional |
+| `ink` | `#0F172A` | Títulos principales y texto de alto contraste |
+| `ink-soft` | `#475569` | Subtítulos, labels secundarios y textos descriptivos |
+| `surface` | `#F8FAFC` | Fondo neutro claro de la interfaz |
 
-Para actualizar la rama con los cambios remotos:
+---
 
-```bash
-git pull origin frontend
-```
+## 🚀 Módulos Implementados en esta Rama
 
-## Documentación por carpeta
+### 1. Autenticación (`/login`)
+* **Layout Split-Screen 50/50:**
+  * **Panel Izquierdo (Desktop):** Fondo en `brand-blue-dark`, textura geométrica abstracta, resplandor difuminado sutil, branding de AnaliCSET, línea decorativa en degradado cian-verde y viñetas de valor institucional con checks.
+  * **Panel Derecho:** Formulario de inicio de sesión centrado, con tipografía refinada, campos accesibles y estados interactivos claros.
+* **Responsive Mobile-First:**
+  * Ocultación del panel de branding en pantallas menores a `lg` (`1024px`).
+  * Cabecera compacta con logo visible automáticamente en dispositivos móviles y tablets.
+  * Prevención de auto-zoom en iOS Safari (`text-base sm:text-sm`).
+  * Áreas de toque cómodas (≥44px) para botones, checkbox y toggle de visibilidad.
+  * Scroll vertical seguro (`overflow-y-auto`) para evitar desbordes en teclados virtuales o pantallas apaisadas.
+* **Validación Reactiva (Svelte 5 Runes):**
+  * Manejo reactivo de estado con `$state` y `$derived`.
+  * Validación en tiempo real de campos vacíos y longitud mínima de contraseña (≥ 6 caracteres).
+  * Alerta de error accesible con soporte ARIA (`role="alert"`, `aria-live="polite"`).
+  * Toggle interactivo para mostrar/ocultar contraseña con íconos vectoriales SVG.
 
-Cada proyecto o área del frontend debe incluir su propio README con la información necesaria para instalarlo, ejecutarlo y desarrollarlo localmente.
+---
 
-Actualmente, la landing page documental del proyecto se encuentra en:
+## 💻 Requisitos e Instalación
 
-- `Landing Page_AnaliCSET/`
+### Requisitos Previos
+* **Node.js:** Versión 18 o superior (recomendado Node 20 LTS).
+* **Gestor de paquetes:** npm, pnpm o yarn.
 
-Dentro de esa carpeta existe su propio `README.md` con los pasos de instalación local y ejecución del entorno.
+### Pasos para Ejecutar Localmente
 
-## Requisitos generales
+1. **Clonar o situarse en la rama `frontend`:**
+   ```bash
+   git checkout frontend
+   ```
 
-Antes de trabajar con el frontend, es recomendable tener instalado:
+2. **Ingresar a la carpeta del frontend:**
+   ```bash
+   cd frontend
+   ```
 
-- Node.js 20 o superior
-- pnpm (recomendado)
-- Git
+3. **Instalar dependencias:**
+   ```bash
+   npm install
+   ```
 
-## Instalación general
+4. **Iniciar el servidor de desarrollo:**
+   ```bash
+   npm run dev
+   ```
+   La aplicación quedará disponible en `http://localhost:5173/login`.
 
-Desde la raíz del repositorio:
+5. **Compilar para producción (validación de build):**
+   ```bash
+   npm run build
+   ```
 
-```bash
-git fetch origin
-git checkout frontend
-git pull origin frontend
-```
+---
 
-Luego, entrar a la carpeta del proyecto específico y seguir los pasos del README interno.
+## 📌 Guía de Colaboración
 
-Ejemplo:
-
-```bash
-cd "Landing Page_AnaliCSET"
-```
-
-## Convención recomendada
-
-- La rama `frontend` será el punto central del desarrollo visual.
-- Cada proyecto visual debe vivir en una carpeta independiente.
-- Cada carpeta debe tener un `README.md` propio con:
-  - objetivo del proyecto
-  - requisitos
-  - instalación local
-  - scripts disponibles
-  - pasos de ejecución
-  - estructura principal
-
-## Nota
-
-Este README documenta la rama frontend y la organización general del repositorio. Para detalles de instalación local de la landing page documental, revisar el `README.md` de la carpeta `Landing Page_AnaliCSET`.
+* Mantener los cambios concentrados en la subcarpeta `frontend/`.
+* No alterar los tokens de color base sin previa validación de diseño institucional.
+* Probar siempre la responsividad en resoluciones móvil (`375px`), tablet (`768px`) y escritorio (`1024px+`).

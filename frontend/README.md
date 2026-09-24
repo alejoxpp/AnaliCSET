@@ -1,42 +1,60 @@
-# sv
+# AnaliCSET — Frontend Application
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Aplicación web desarrollada con **SvelteKit 2**, **Svelte 5** y **Tailwind CSS** para el proyecto **AnaliCSET** (Comité de Evaluación y Seguimiento — CSET Bucaramanga, SENA).
 
-## Creating a project
+---
 
-If you're seeing this, you've probably already done this step. Congrats!
+## 🛠️ Tecnologías y Herramientas
 
-```sh
-# create a new project
-npx sv create my-app
+* **Framework:** [SvelteKit 2](https://kit.svelte.dev/) con [Svelte 5](https://svelte.dev/) (usando Runes: `$state`, `$derived`, `$props`).
+* **Estilos:** [Tailwind CSS v3](https://tailwindcss.com/) configurado con tokens corporativos.
+* **Empaquetador y Dev Server:** [Vite 8](https://vitejs.dev/).
+* **Íconos y Gráficos:** SVG inline accesibles y recursos vectoriales institucionales.
+
+---
+
+## 📂 Estructura del Código Fuente
+
+```text
+frontend/
+├── src/
+│   ├── app.html              # Shell HTML con viewport responsive y metadatos
+│   ├── app.css               # Importación de directivas @tailwind
+│   ├── lib/
+│   │   └── assets/           # Logotipos (PNG / SVG transparentes) y favicons
+│   └── routes/
+│       ├── +layout.svelte    # Shell global (favicon, metadatos y CSS global)
+│       ├── +page.svelte      # Ruta de inicio
+│       └── login/
+│           └── +page.svelte  # Interfaz de Login (Split-screen responsive + Runes)
+├── static/                   # Favicons e íconos estáticos
+├── tailwind.config.js        # Paleta de colores oficial (brand-blue, accent-cyan, etc.)
+└── package.json
 ```
 
-To recreate this project with the same configuration:
+---
 
-```sh
-# recreate this project
-npx sv@0.17.1 create --template minimal --no-types --no-install .
-```
+## 🚀 Scripts Disponibles
 
-## Developing
+En este directorio (`frontend/`), puedes ejecutar:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+| Comando | Descripción |
+| :--- | :--- |
+| `npm run dev` | Inicia el servidor de desarrollo Vite con hot-reload en `http://localhost:5173/` |
+| `npm run build` | Genera el bundle optimizado para producción |
+| `npm run preview` | Previsualiza localmente el build de producción |
 
-```sh
-npm run dev
+---
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## 📱 Consideraciones de Responsive Design
 
-## Building
+* **Móvil (< 640px):** Formulario centrado a pantalla completa con cabecera compacta que incluye el isotipo de AnaliCSET. Inputs configurados con `text-base` para prevenir auto-zoom no deseado en iOS Safari.
+* **Tablet (640px – 1023px):** Contenedor delimitado (`max-w-[400px]`), paddings amplios y zonas táctiles confortables (≥44px de altura).
+* **Escritorio (≥ 1024px):** Layout split-screen 50/50 con panel de branding institucional a la izquierda y formulario de acceso a la derecha.
 
-To create a production version of your app:
+---
 
-```sh
-npm run build
-```
+## 🔒 Convenciones y Validación
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+* **Svelte 5 Runes:** Se emplea la sintaxis moderna (`$state`, `$derived`) en lugar de variables let mutables tradicionales.
+* **Accesibilidad (a11y):** Etiquetas `<label>` explícitamente enlazadas mediante `for`, mensajes de error con `role="alert"` y atributos ARIA correspondientes.
