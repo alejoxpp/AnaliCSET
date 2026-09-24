@@ -8,7 +8,7 @@ export default {
 				'accent-cyan': '#00C2FF',
 				'accent-green': '#25ED4D',
 				'ink': '#0F172A',
-				'ink-soft': '#64748B',
+				'ink-soft': '#475569',
 				'surface': '#F8FAFC'
 			}
 		}
