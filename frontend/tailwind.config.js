@@ -3,10 +3,10 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				'brand-blue': '#1D5FE0',
-				'brand-blue-dark': '#143F99',
-				'accent-cyan': '#22D3EE',
-				'accent-green': '#22C55E',
+				'brand-blue': '#0E6DFF',
+				'brand-blue-dark': '#0A52C7',
+				'accent-cyan': '#00C2FF',
+				'accent-green': '#25ED4D',
 				'ink': '#0F172A',
 				'ink-soft': '#64748B',
 				'surface': '#F8FAFC'
