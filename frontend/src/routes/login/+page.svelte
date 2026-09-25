@@ -86,9 +86,9 @@
 
 		<!-- Bloque de Marca y Características (Cuadrante inferior/medio) -->
 		<div class="relative z-10 max-w-md my-auto lg:my-0">
-			<div class="flex items-center gap-3.5 mb-2">
+			<div class="flex items-center gap-4 mb-2">
 				<div
-					class="w-12 h-12 rounded-xl bg-white p-2 shadow-lg flex items-center justify-center flex-shrink-0"
+					class="w-14 h-14 rounded-2xl bg-white p-2 shadow-lg flex items-center justify-center flex-shrink-0"
 				>
 					<img
 						src={logo}
@@ -97,13 +97,13 @@
 					/>
 				</div>
 				<div>
-					<h2 class="text-2xl font-bold tracking-tight text-white">AnaliCSET</h2>
-					<p class="text-xs text-white/70 font-medium">Sistema de Inteligencia y Seguimiento</p>
+					<h2 class="text-3xl xl:text-4xl font-extrabold tracking-tight text-white leading-tight">AnaliCSET</h2>
+					<p class="text-xs sm:text-sm text-white/75 font-medium">Sistema de Inteligencia y Seguimiento</p>
 				</div>
 			</div>
 
 			<!-- Único acento degradado: accent-cyan a accent-green -->
-			<div class="h-[3px] w-20 bg-gradient-to-r from-accent-cyan to-accent-green rounded-full my-4"></div>
+			<div class="h-[3px] w-24 bg-gradient-to-r from-accent-cyan to-accent-green rounded-full my-4"></div>
 
 			<!-- Tagline institucional -->
 			<p class="text-sm text-slate-200 leading-relaxed font-normal mb-8">
@@ -185,11 +185,11 @@
 		<div class="w-full max-w-[400px] flex flex-col">
 			<!-- Encabezado de marca visible solo en móvil -->
 			<div class="lg:hidden flex items-center gap-3 mb-6 sm:mb-8">
-				<div class="w-10 h-10 rounded-lg bg-white p-1.5 shadow-sm border border-slate-200 flex items-center justify-center flex-shrink-0">
+				<div class="w-11 h-11 rounded-xl bg-white p-1.5 shadow-sm border border-slate-200 flex items-center justify-center flex-shrink-0">
 					<img src={logo} alt="Logo AnaliCSET" class="w-full h-full object-contain" />
 				</div>
 				<div>
-					<span class="text-lg font-bold text-ink tracking-tight block">AnaliCSET</span>
+					<span class="text-xl font-bold text-ink tracking-tight block">AnaliCSET</span>
 					<span class="text-xs text-ink-soft">SENA · CSET Bucaramanga</span>
 				</div>
 			</div>
